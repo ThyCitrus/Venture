@@ -1,8 +1,6 @@
 from core.utils import print_color
 import time
 
-from main import GameState
-
 JOURNAL_ENTRIES = {
     # === CHARACTERS ===
     # Roslin
@@ -101,7 +99,13 @@ CATEGORY_LABELS = {
 CATEGORY_ORDER = ["character", "location", "enemy", "lore"]
 
 
-def unlock_journal_entry(state: GameState, key: str) -> None:
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from core.state import GameState
+
+
+def unlock_journal_entry(state: "GameState", key: str) -> None:
     """Call this whenever the player meets someone / visits somewhere for the first time."""
     if key in JOURNAL_ENTRIES and key not in state.journal_entries:
         state.journal_entries.append(key)

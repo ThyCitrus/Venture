@@ -1,3 +1,10 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from core.state import GameState
+
+
 class PlayerClass:
     def __init__(
         self,
@@ -34,8 +41,8 @@ FIGHTER = PlayerClass(
     health_mod=1.5,
     damage_mod=1.5,
     gold_mod=1.2,
-    mana_mod=0.0,  # No mana
-    stamina_mod=1.5,  # High stamina (90)
+    mana_mod=0.0,
+    stamina_mod=1.5,
 )
 
 WARLOCK = PlayerClass(
@@ -44,8 +51,8 @@ WARLOCK = PlayerClass(
     health_mod=0.9,
     damage_mod=1.1,
     gold_mod=1.2,
-    mana_mod=1.5,  # High mana (90)
-    stamina_mod=0.0,  # No stamina
+    mana_mod=1.5,
+    stamina_mod=0.0,
 )
 
 ROGUE = PlayerClass(
@@ -54,8 +61,8 @@ ROGUE = PlayerClass(
     health_mod=1.0,
     damage_mod=1.2,
     gold_mod=1.5,
-    mana_mod=0.0,  # No mana
-    stamina_mod=1.3,  # Good stamina (78)
+    mana_mod=0.0,
+    stamina_mod=1.3,
 )
 
 PALADIN = PlayerClass(
@@ -64,8 +71,8 @@ PALADIN = PlayerClass(
     health_mod=1.2,
     damage_mod=1.3,
     gold_mod=1.0,
-    mana_mod=0.8,  # Some mana (48)
-    stamina_mod=0.8,  # Some stamina (48)
+    mana_mod=0.8,
+    stamina_mod=0.8,
 )
 
 CLERIC = PlayerClass(
@@ -74,7 +81,7 @@ CLERIC = PlayerClass(
     health_mod=0.7,
     damage_mod=0.9,
     gold_mod=1.1,
-    mana_mod=1.4,  # High mana (84)
-    stamina_mod=0.0,  # No stamina
+    mana_mod=1.4,
+    stamina_mod=0.0,
 )
 # endregion

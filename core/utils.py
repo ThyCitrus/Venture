@@ -3,6 +3,10 @@ import sys
 import time
 from typing import TYPE_CHECKING, List
 
+from core.state import GameState
+from data.journal import CATEGORY_LABELS, CATEGORY_ORDER, JOURNAL_ENTRIES
+from main import LOCATION_MAP
+
 
 def print_color(text: str, r: int, g: int, b: int) -> None:
     print(f"\033[38;2;{r};{g};{b}m{text}\033[0m")
@@ -386,6 +390,153 @@ def show_hud(state) -> None:
     # Combine all parts
     parts = [health_text] + energy_parts + [gold_text, level_text]
     print(" | ".join(parts))
+
+
+def sleep(state: GameState, location: str = "unknown") -> None:
+    """
+    Universal sleep function - restores health and advances time.
+    Call this whenever the player sleeps anywhere.
+    """
+    clear()
+
+    # Sleep messages based on location
+    sleep_messages = {
+        "wilson_bar": [
+            "You collapse onto the rough bed upstairs. The noise from below fades as exhaustion takes over.",
+            "The mattress is lumpy, but sleep comes quickly after a long shift.",
+            "You drift off to the muffled sounds of the tavern below.",
+        ],
+        "inn": [
+            "You sink into the comfortable bed. The inn is quiet and peaceful.",
+            "The soft mattress welcomes you as you close your eyes.",
+            "Sleep comes easily in the warm, cozy room.",
+        ],
+        "camp": [
+            "You lay your bedroll on the ground. The stars are bright above.",
+            "The crackling fire provides warmth as you drift off.",
+            "Despite the hard ground, exhaustion pulls you into deep sleep.",
+        ],
+        "unknown": [
+            "You find a place to rest and close your eyes.",
+            "Sleep comes, heavy and dreamless.",
+            "You drift into unconsciousness.",
+        ],
+    }
+
+    import random
+
+    message = random.choice(sleep_messages.get(location, sleep_messages["unknown"]))
+    write_slow(message, 50, 150, 150, 200)
+    print()
+    time.sleep(2)
+
+    write_slow("...", 100, 100, 100, 100)
+    time.sleep(1)
+    clear()
+
+    # Calculate healing - restore to 90% of max health (or current health if higher)
+    heal_amount = int(state.max_health * 0.9)
+    old_health = state.health
+    state.health = max(state.health, heal_amount)
+    healed = state.health - old_health
+
+    # Restore mana and stamina to 100%
+    state.mana = state.max_mana
+    state.stamina = state.max_stamina
+
+    if healed > 0:
+        write_slow("You wake feeling refreshed.", 50, 50, 255, 50)
+        print_color(f"Health restored: {old_health} → {state.health}", 50, 255, 50)
+    else:
+        write_slow("You wake feeling rested.", 50, 200, 200, 200)
+
+    if state.max_mana > 0 or state.max_stamina > 0:
+        print_color("Energy fully restored!", 100, 200, 255)
+
+    print()
+
+    # Could add other effects here:
+    # - Remove status effects (poison, exhaustion, etc.)
+    # - Advance time/day counter
+    # - Trigger random events
+    # - Restore mana if added
+
+    state.save()
+    time.sleep(2)
+
+
+def show_journal(state: GameState) -> None:
+    """Display the journal menu."""
+    while True:
+        clear()
+        print_color("=== Journal ===", 255, 200, 100)
+        print()
+
+        if not state.journal_entries:
+            print("Your journal is empty.")
+            print()
+            press_any_key("Press any key to return...")
+            return
+
+        # Group unlocked entries by category
+        grouped = {cat: [] for cat in CATEGORY_ORDER}
+        for key in state.journal_entries:
+            entry = JOURNAL_ENTRIES.get(key)
+            if entry:
+                grouped[entry["category"]].append((key, entry))
+
+        # Build flat display list
+        display = []
+        for cat in CATEGORY_ORDER:
+            entries = grouped[cat]
+            if entries:
+                print_color(f"\n=== {CATEGORY_LABELS[cat]} ===", 255, 200, 100)
+                for key, entry in entries:
+                    print(f"{len(display) + 1}. {entry['title']}")
+                    display.append((key, entry))
+
+        print()
+        choice = menu_choice([e["title"] for _, e in display] + ["Close"])
+
+        if choice == len(display) + 1:
+            return
+
+        # Show selected entry
+        key, entry = display[choice - 1]
+        clear()
+        print_color(f"=== {entry['title']} ===", 255, 200, 100)
+        print_color(f"[{CATEGORY_LABELS[entry['category']]}]", 150, 150, 150)
+        print()
+        print(entry["text"])
+        print()
+        press_any_key("Press any key to return...")
+
+
+def location_router(state: GameState) -> None:
+    from core.locations import kimaer, shop, wilsons_bar
+
+    """Routes the player to the correct location based on state.location"""
+    location = state.location
+
+    # Check if it's a shop (has shop type in the name)
+    if "General Store" in location:
+        town = location.split()[0]
+        shop(state, location_name=town, shop_type="general")
+    elif "Alchemy Shop" in location:
+        town = location.split()[0]
+        shop(state, location_name=town, shop_type="alchemy")
+    elif location == "Wilson's Bar":
+        wilsons_bar(state)
+    # Direct location lookup
+    elif location in LOCATION_MAP:
+        LOCATION_MAP[location](state)
+    else:
+        # Fallback if location is unrecognized
+        print_color(
+            f"Unknown location: {location}. Returning to Kimaer...", 255, 200, 50
+        )
+        time.sleep(2)
+        kimaer(state)
 
 
 # region Minigames

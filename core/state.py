@@ -1,5 +1,9 @@
+import json
 from pathlib import Path
-from core.classes import *
+from typing import Optional, List
+from core.classes import PlayerClass, FIGHTER, WARLOCK, ROGUE, PALADIN, CLERIC
+from core.inventory import Inventory
+from core.utils import print_color
 
 
 class GameState:
