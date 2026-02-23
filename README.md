@@ -28,4 +28,4 @@ General info on characters, enemies, locations, etc
 # --------------------------------------------------------------------
 
 So, with all that in mind, I will do my best to keep up with this here file, but I am a little new to using github like a proper and kind and respectful individual, 
-so if I make mistakes and am just overall doing something wrong, please correct me but in like, a kind way so that way I don't feel bad, yeah? I want to be help, not infantalized.
+so if I make mistakes and am just overall doing something wrong, please correct me but in like, a kind way so that way I don't feel bad, yeah? I want to be helped, not infantalized.
