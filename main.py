@@ -16,11 +16,13 @@ import random
 from core.utils import *
 from core.constants import *
 from core.combat import combat, Enemy
+from data import journal
 from data.items import ITEMS
 from data.map import show_map
 from quests.quests import start_quest, advance_quest, is_quest_active, show_quest_log
 from quests.hooks import get_location_hook
 from core.locations import kimaer, wilsons_bar, shop, buy_items, sell_items, SHOP_DATA
+from data.journal import JOURNAL_ENTRIES, CATEGORY_LABELS, CATEGORY_ORDER
 from dialogue.kimaer.wilson import *
 from dialogue.kimaer.benji import *
 from dialogue.kimaer.celeste import *
@@ -73,6 +75,7 @@ class GameState:
         self.active_quests: List = []
         self.completed_quests: List[str] = []
         self.active_effects: list = []
+        self.journal_entries: List[str] = []
 
     def save(self) -> None:
         saves_dir = Path("saves")
@@ -664,6 +667,62 @@ def sleep(state: GameState, location: str = "unknown") -> None:
     time.sleep(2)
 
 
+def unlock_journal_entry(state: GameState, key: str) -> None:
+    """Call this whenever the player meets someone / visits somewhere for the first time."""
+    if key in JOURNAL_ENTRIES and key not in state.journal_entries:
+        state.journal_entries.append(key)
+        title = JOURNAL_ENTRIES[key]["title"]
+        print_color(f'[Journal updated: "{title}"]', 150, 150, 255)
+        time.sleep(1)
+
+
+def show_journal(state: GameState) -> None:
+    """Display the journal menu."""
+    while True:
+        clear()
+        print_color("=== Journal ===", 255, 200, 100)
+        print()
+
+        if not state.journal_entries:
+            print("Your journal is empty.")
+            print()
+            press_any_key("Press any key to return...")
+            return
+
+        # Group unlocked entries by category
+        grouped = {cat: [] for cat in CATEGORY_ORDER}
+        for key in state.journal_entries:
+            entry = JOURNAL_ENTRIES.get(key)
+            if entry:
+                grouped[entry["category"]].append((key, entry))
+
+        # Build flat display list
+        display = []
+        for cat in CATEGORY_ORDER:
+            entries = grouped[cat]
+            if entries:
+                print_color(f"\n=== {CATEGORY_LABELS[cat]} ===", 255, 200, 100)
+                for key, entry in entries:
+                    print(f"{len(display) + 1}. {entry['title']}")
+                    display.append((key, entry))
+
+        print()
+        choice = menu_choice([e["title"] for _, e in display] + ["Close"])
+
+        if choice == len(display) + 1:
+            return
+
+        # Show selected entry
+        key, entry = display[choice - 1]
+        clear()
+        print_color(f"=== {entry['title']} ===", 255, 200, 100)
+        print_color(f"[{CATEGORY_LABELS[entry['category']]}]", 150, 150, 150)
+        print()
+        print(entry["text"])
+        print()
+        press_any_key("Press any key to return...")
+
+
 # endregion
 
 
@@ -738,14 +797,18 @@ def show_inventory_menu(state: GameState) -> None:
 
         # Get choice
         choice = menu_choice(
-            [item.name for item in item_list] + ["Map"] + ["Exit"],
+            [item.name for item in item_list] + ["Map"] + ["Journal"] + ["Exit"],
         )
 
         if choice == len(item_list) + 1:
             clear()
             show_map(state)
             return
-        elif choice == len(item_list) + 2:  # Exit
+        elif choice == len(item_list) + 2:
+            clear()
+            show_journal(state)
+            return
+        elif choice == len(item_list) + 3:
             clear()
             location_router(state)
             return
