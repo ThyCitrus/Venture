@@ -2,7 +2,7 @@ import random
 import time
 from core.utils import *
 from core.constants import KIMAER_BENJI
-from main import unlock_journal_entry
+from data.journal import unlock_journal_entry
 from quests.quests import start_quest, advance_quest, is_quest_active
 
 R, G, B = 255, 100, 75

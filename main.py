@@ -667,15 +667,6 @@ def sleep(state: GameState, location: str = "unknown") -> None:
     time.sleep(2)
 
 
-def unlock_journal_entry(state: GameState, key: str) -> None:
-    """Call this whenever the player meets someone / visits somewhere for the first time."""
-    if key in JOURNAL_ENTRIES and key not in state.journal_entries:
-        state.journal_entries.append(key)
-        title = JOURNAL_ENTRIES[key]["title"]
-        print_color(f'[Journal updated: "{title}"]', 150, 150, 255)
-        time.sleep(1)
-
-
 def show_journal(state: GameState) -> None:
     """Display the journal menu."""
     while True:

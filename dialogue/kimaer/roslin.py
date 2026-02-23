@@ -10,7 +10,7 @@ from core.utils import (
 import time
 
 from core.constants import KIMAER_ROSLIN
-from main import unlock_journal_entry
+from data.journal import unlock_journal_entry
 
 R, G, B = 200, 250, 150
 
