@@ -9,6 +9,7 @@ from core.utils import (
 )
 import time
 from core.constants import KIMAER_CELESTE
+from main import unlock_journal_entry
 
 R, G, B = 200, 20, 140
 
@@ -100,6 +101,7 @@ def celeste_first_meeting(state):
             )
             print()
             topics["introduced"] = True
+            unlock_journal_entry(state, "celeste")
 
         elif action == "store":
             write_slow(f" What is it you sell here?", 50, r, g, b)
@@ -130,6 +132,7 @@ def celeste_first_meeting(state):
                 )
             print()
             topics["store"] = True
+            unlock_journal_entry(state, "celeste_shop")
 
         elif action == "town":
             write_slow(f" What can you tell me about Kimaer?", 50, r, g, b)
@@ -159,6 +162,7 @@ def celeste_first_meeting(state):
             )
             print()
             topics["town"] = True
+            unlock_journal_entry(state, "celeste_town")
 
         elif action == "leave":
             write_slow(f" ...", 50, r, g, b)
@@ -376,6 +380,7 @@ def celeste_rat_quest_panic(state):
         print()
 
         start_quest(state, "celeste_rats")
+        unlock_journal_entry(state, "celeste_rats")
         advance_quest(state, "celeste_rats")
         print_color("New Quest: A Scream in the Night", 255, 200, 50)
         print()

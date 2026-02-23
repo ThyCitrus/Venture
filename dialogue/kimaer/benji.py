@@ -2,6 +2,7 @@ import random
 import time
 from core.utils import *
 from core.constants import KIMAER_BENJI
+from main import unlock_journal_entry
 from quests.quests import start_quest, advance_quest, is_quest_active
 
 R, G, B = 255, 100, 75
@@ -70,6 +71,7 @@ def benji_repeat_meeting(state):
     quote = random.choice(BENJI_QUOTES)
     write_slow(f" {quote}", 50, R, G, B)
     print()
+    unlock_journal_entry(state, "benji")
     press_any_key()
 
 

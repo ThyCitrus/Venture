@@ -10,6 +10,7 @@ from core.utils import (
 import time
 
 from core.constants import KIMAER_ROSLIN
+from main import unlock_journal_entry
 
 R, G, B = 200, 250, 150
 
@@ -105,6 +106,7 @@ def roslin_first_meeting(state):
             )
             print()
             topics["introduced"] = True
+            unlock_journal_entry(state, "roslin")
 
         elif action == "store":
             write_slow(f" What do you sell here?", 50, r, g, b)
@@ -124,6 +126,7 @@ def roslin_first_meeting(state):
                 )
             print()
             topics["store"] = True
+            unlock_journal_entry(state, "roslin_store")
 
         elif action == "town":
             write_slow(f" What's this town like?", 50, r, g, b)
@@ -153,6 +156,7 @@ def roslin_first_meeting(state):
             )
             print()
             topics["town"] = True
+            unlock_journal_entry(state, "roslin_town")
 
         elif action == "leave":
             write_slow(f" ...", 50, r, g, b)

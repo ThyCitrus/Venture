@@ -1,0 +1,31 @@
+{
+  "name": "Anon",
+  "player_color": "71 148 247",
+  "location": "Kimaer",
+  "health": 120,
+  "max_health": 120,
+  "mana": 48,
+  "max_mana": 48,
+  "stamina": 48,
+  "max_stamina": 48,
+  "gold": 0,
+  "inventory": [],
+  "level": 1,
+  "xp": 0,
+  "next_level": 100,
+  "player_class": "Paladin",
+  "race": "Human",
+  "npc_met": {},
+  "npc_topics_asked": {},
+  "locations_visited": {
+    "Kimaer": true
+  },
+  "wilson_employee": false,
+  "wilson_room_access": false,
+  "equipped_weapon": null,
+  "equipped_armor": null,
+  "active_quests": [],
+  "completed_quests": [],
+  "active_effects": [],
+  "journal_entries": []
+}

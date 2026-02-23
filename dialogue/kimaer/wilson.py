@@ -9,6 +9,7 @@ from core.utils import (
 )
 import time
 from core.constants import KIMAER_WILSON
+from main import unlock_journal_entry
 
 R, G, B = 100, 140, 75
 
@@ -99,6 +100,7 @@ def wilson_first_meeting(state):
             )
             print()
             topics["introduced"] = True
+            unlock_journal_entry(state, "wilson")
 
         elif action == "tavern":
             write_slow(f" What's the tavern like?", 50, r, g, b)
@@ -129,6 +131,7 @@ def wilson_first_meeting(state):
                 )
             print()
             topics["tavern"] = True
+            unlock_journal_entry(state, "wilson_tavern")
 
         elif action == "town":
             write_slow(f" What's Kimaer like?", 50, r, g, b)
@@ -158,6 +161,7 @@ def wilson_first_meeting(state):
             )
             print()
             topics["town"] = True
+            unlock_journal_entry(state, "wilson_gnome")
 
         elif action == "leave":
             write_slow(f" ...", 50, r, g, b)
