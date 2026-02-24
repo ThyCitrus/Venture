@@ -1,3 +1,5 @@
+from core.display import clear, print_color, flush_input, press_any_key, write_slow
+
 BASE_MAP = [
     r".....................................................................................................................................................____..............",
     r"..................................................................|>.............................................................................__(`....')___.........",
@@ -125,7 +127,6 @@ def render_map(state) -> list[str]:
 
 
 def show_map(state) -> None:
-    from core.utils import clear, print_color, flush_input, press_any_key, write_slow
 
     clear()
     visited = {k.lower() for k in state.locations_visited}

@@ -1,6 +1,6 @@
 {
   "name": "Anon",
-  "player_color": "71 148 247",
+  "player_color": "230 54 60",
   "location": "Kimaer",
   "health": 120,
   "max_health": 120,
@@ -9,7 +9,14 @@
   "stamina": 48,
   "max_stamina": 48,
   "gold": 0,
-  "inventory": [],
+  "inventory": [
+    {
+      "name": "Journal",
+      "item_type": "misc",
+      "count": 1,
+      "value": 0
+    }
+  ],
   "level": 1,
   "xp": 0,
   "next_level": 100,

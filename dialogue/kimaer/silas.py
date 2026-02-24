@@ -1,9 +1,5 @@
-from core.utils import (
-    write_slow,
-    menu_choice,
-    press_any_key,
-    get_player_color,
-)
+from core.display import write_slow, press_any_key
+from core.utils import get_player_color
 import time
 from core.constants import KIMAER_SILAS
 from data.journal import unlock_journal_entry

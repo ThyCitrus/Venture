@@ -1,4 +1,4 @@
-from core.utils import print_color
+from core.display import print_color
 import time
 
 JOURNAL_ENTRIES = {

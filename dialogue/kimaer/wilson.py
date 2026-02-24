@@ -1,15 +1,16 @@
-from core.utils import (
-    clear,
-    write_slow,
-    menu_choice,
-    press_any_key,
-    print_color,
-    display_dialogue,
-    get_player_color,
-)
+from __future__ import annotations
+
+from ultralytics import TYPE_CHECKING
+
+from core.display import clear, write_slow, press_any_key, print_color
+from core.utils import get_player_color, menu_choice
 import time
 from core.constants import KIMAER_WILSON
 from data.journal import unlock_journal_entry
+
+if TYPE_CHECKING:
+    from core.events import trigger_rat_quest
+    from core.utils import sleep
 
 R, G, B = 100, 140, 75
 
@@ -485,7 +486,7 @@ def wilson_repeat_greeting(state):
             print_color("Paid 20 gold for the room.", 200, 255, 200)
             time.sleep(1)
 
-            from main import sleep
+            # from core.utils import sleep
 
             sleep(state, "wilson_bar")
 
@@ -494,7 +495,7 @@ def wilson_repeat_greeting(state):
                 state.rat_quest_triggered = False
 
             if not state.rat_quest_triggered:
-                from main import trigger_rat_quest
+                # from core.events import trigger_rat_quest
 
                 trigger_rat_quest(state)
         else:
@@ -568,7 +569,7 @@ def wilson_work_shift(state):
     state.wilson_room_access = True
     press_any_key()
 
-    from main import sleep
+    # from core.utils import sleep
 
     sleep(state, "wilson_bar")
 
@@ -577,7 +578,7 @@ def wilson_work_shift(state):
         state.rat_quest_triggered = False
 
     if not state.rat_quest_triggered:
-        from main import trigger_rat_quest
+        # from core.events import trigger_rat_quest
 
         trigger_rat_quest(state)
 

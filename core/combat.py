@@ -1,14 +1,8 @@
 import time
 import random
 from typing import List
-from core.utils import (
-    clear,
-    print_color,
-    write_slow,
-    press_any_key,
-    menu_choice,
-    add_xp,
-)
+from core.display import clear, print_color, write_slow, press_any_key
+from core.utils import menu_choice, add_xp
 from data.enemies import ENEMIES
 from data.skills import SPELLS, TECHNIQUES
 import select as _select

@@ -288,6 +288,12 @@ ITEMS = {
         "sellable_to": ["alchemy"],
     },
     # region Misc.
+    "Journal": {
+        "type": "misc",
+        "value": 0,
+        "description": "Your journal.",
+        "sellable_to": [],
+    },
     "Ruby Fragment": {
         "type": "ingrediant",
         "value": 150,

@@ -1,18 +1,15 @@
 # region Inventory
 
+from __future__ import annotations
+
 import time
-from typing import List
+from typing import List, TYPE_CHECKING
 from data.items import ITEMS
 from data.map import show_map
-from core.utils import (
-    location_router,
-    print_color,
-    clear,
-    press_any_key,
-    menu_choice,
-    show_journal,
-)
-from core.state import GameState
+from core.display import clear, press_any_key, print_color
+
+if TYPE_CHECKING:
+    from core.state import GameState
 
 
 class InventoryItem:
@@ -29,6 +26,7 @@ class Inventory:
 
     def add_item(self, name: str, count: int = 1) -> None:
         """Add an item to inventory using the item database"""
+
         if name not in ITEMS:
             print_color(f"Warning: Unknown item '{name}'", 255, 100, 100)
             return
@@ -70,6 +68,7 @@ class Inventory:
 
     def display(self) -> None:
         """Display inventory organized by type"""
+
         if not self.items:
             print("Inventory is empty.")
             return
@@ -122,6 +121,12 @@ class Inventory:
 
 def show_inventory_menu(state: GameState) -> None:
     """Display and interact with inventory"""
+    from core.utils import (
+        location_router,
+        menu_choice,
+        show_journal,
+    )
+
     while True:
         clear()
         print_color("=== Inventory ===", 255, 200, 100)
@@ -146,7 +151,7 @@ def show_inventory_menu(state: GameState) -> None:
         }
 
         # Build a flat list for selection
-        item_list = []
+        item_list = ["Journal"]
         display_index = 1
 
         for item_type in type_order:
@@ -190,7 +195,7 @@ def show_inventory_menu(state: GameState) -> None:
 
         # Get choice
         choice = menu_choice(
-            [item.name for item in item_list] + ["Map"] + ["Journal"] + ["Exit"],
+            [item.name for item in item_list] + ["Map"] + ["Exit"],
         )
 
         if choice == len(item_list) + 1:
@@ -198,10 +203,6 @@ def show_inventory_menu(state: GameState) -> None:
             show_map(state)
             return
         elif choice == len(item_list) + 2:
-            clear()
-            show_journal(state)
-            return
-        elif choice == len(item_list) + 3:
             clear()
             location_router(state)
             return
@@ -213,6 +214,10 @@ def show_inventory_menu(state: GameState) -> None:
 
 def interact_with_item(state: GameState, item: InventoryItem) -> None:
     """Handle using/equipping an item"""
+    from core.utils import (
+        menu_choice,
+    )
+
     clear()
     item_data = ITEMS.get(item.name, {})
 
@@ -242,6 +247,8 @@ def interact_with_item(state: GameState, item: InventoryItem) -> None:
             options.append("Unequip")
         else:
             options.append("Equip")
+    elif item.item_type == "journal":
+        options.append("Read")
 
     options.append("Back")
 
@@ -253,11 +260,14 @@ def interact_with_item(state: GameState, item: InventoryItem) -> None:
         equip_item(state, item)
     elif options[choice - 1] == "Unequip":
         unequip_item(state, item)
+    elif options[choice - 1] == "Read":
+        read_journal(state)
     # "Back" just returns
 
 
 def consume_item(state: GameState, item: InventoryItem) -> None:
     """Use a consumable item"""
+
     item_data = ITEMS.get(item.name, {})
     effect = item_data.get("effect", {})
 
@@ -282,6 +292,7 @@ def consume_item(state: GameState, item: InventoryItem) -> None:
 
 def equip_item(state: GameState, item: InventoryItem) -> None:
     """Equip a weapon or armor"""
+
     if item.item_type == "weapon":
         if not hasattr(state, "equipped_weapon"):
             state.equipped_weapon = None
@@ -308,6 +319,7 @@ def equip_item(state: GameState, item: InventoryItem) -> None:
 
 def unequip_item(state: GameState, item: InventoryItem) -> None:
     """Unequip a weapon or armor"""
+
     if item.item_type == "weapon":
         state.equipped_weapon = None
         print_color(f"Unequipped {item.name}", 200, 200, 200)
@@ -317,6 +329,14 @@ def unequip_item(state: GameState, item: InventoryItem) -> None:
 
     state.save()
     time.sleep(1)
+
+
+def read_journal(state: GameState) -> None:
+    """Read the player's journal"""
+    from core.utils import show_journal
+
+    clear()
+    show_journal(state)
 
 
 # endregion

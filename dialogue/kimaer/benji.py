@@ -1,6 +1,7 @@
 import random
 import time
-from core.utils import *
+from core.display import clear, write_slow, press_any_key
+from core.utils import get_player_color
 from core.constants import KIMAER_BENJI
 from data.journal import unlock_journal_entry
 from quests.quests import start_quest, advance_quest, is_quest_active

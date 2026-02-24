@@ -1,5 +1,5 @@
 from typing import Optional, Callable, List
-
+from core.display import clear, press_any_key, print_color
 from core.utils import add_xp
 
 
@@ -188,7 +188,6 @@ def advance_quest(state, quest_id: str) -> bool:
 
 def apply_quest_rewards(state, quest: Quest) -> None:
     """Apply quest rewards to player state."""
-    from core.utils import print_color
 
     print()
     print_color("=== QUEST COMPLETE ===", 50, 255, 50)
@@ -233,7 +232,6 @@ def is_quest_completed(state, quest_id: str) -> bool:
 
 def show_quest_log(state) -> None:
     """Display the quest log."""
-    from core.utils import clear, print_color, press_any_key
 
     clear()
     print_color("=== Quest Log ===", 255, 200, 100)

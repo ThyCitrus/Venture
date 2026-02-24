@@ -1,12 +1,5 @@
-from core.utils import (
-    clear,
-    write_slow,
-    menu_choice,
-    press_any_key,
-    print_color,
-    display_dialogue,
-    get_player_color,
-)
+from core.display import write_slow, press_any_key, print_color
+from core.utils import get_player_color, menu_choice
 import time
 
 from core.constants import KIMAER_ROSLIN

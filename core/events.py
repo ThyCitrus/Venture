@@ -1,5 +1,5 @@
 import time
-from core.utils import clear, write_slow, press_any_key
+from core.display import clear, write_slow, press_any_key
 from core.locations import kimaer, shop
 
 # region Events
