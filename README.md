@@ -54,8 +54,11 @@ No external dependencies — standard library only. The `requirements.txt` is in
 ```
 venture/
 ├── main.py               # Entry point and core game loop
-├── requirements.txt      # No dependencies, but it's there
+├── requirements.txt      # *A* dependency: pygame
 ├── core/
+|   ├── audio             # FOR MUSIC!! WE HAVE THAT!!
+|   |   ├──music
+|   |   └──sfx
 │   ├── combat.py         # Combat engine
 │   ├── locations.py      # Location handlers
 │   ├── utils.py          # Shared utilities (printing, input, XP, etc.)
