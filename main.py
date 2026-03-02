@@ -41,15 +41,17 @@ def show_main_menu() -> None:
     print_color("      Welcome to Venture", 255, 200, 50)
     print("==============================")
     print()
-    choice = menu_choice(["Start New Game", "Load Game", "Exit"])
-    if choice == 1:
+    choice = input(
+        "1. Start New Game\n2. Load Game\n3. Exit\n4. Credits\nEnter your choice: "
+    )
+    if choice == "1":
         start_new_game()
-    elif choice == 2:
+    elif choice == "2":
         load_game()
-    elif choice == 3:
+    elif choice == "3":
         write_slow("...", 50, 200, 100, 100)
         sys.exit()
-    elif choice == 9:
+    elif choice.lower() == "credits":
         show_credits()
 
 
