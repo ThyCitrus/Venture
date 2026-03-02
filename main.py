@@ -41,9 +41,7 @@ def show_main_menu() -> None:
     print_color("      Welcome to Venture", 255, 200, 50)
     print("==============================")
     print()
-    choice = input(
-        "1. Start New Game\n2. Load Game\n3. Exit\n4. Credits\nEnter your choice: "
-    )
+    choice = input("1. Start New Game\n2. Load Game\n3. Exit\n")
     if choice == "1":
         start_new_game()
     elif choice == "2":
