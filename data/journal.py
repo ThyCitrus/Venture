@@ -109,6 +109,4 @@ def unlock_journal_entry(state: "GameState", key: str) -> None:
     """Call this whenever the player meets someone / visits somewhere for the first time."""
     if key in JOURNAL_ENTRIES and key not in state.journal_entries:
         state.journal_entries.append(key)
-        title = JOURNAL_ENTRIES[key]["title"]
-        print_color(f'[Journal updated: "{title}"]', 150, 150, 255)
         time.sleep(1)
