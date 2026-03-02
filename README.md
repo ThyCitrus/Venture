@@ -37,7 +37,7 @@ Planned locations include Lunara, Duskwood, Eldoria, Frostholm, the Gulf of Burh
 
 ## Getting Started
 
-**Requirements:** Python 3.10+ (I used 3.12)
+**Requirements:** Python 3.10+ (developed on 3.12)
 
 ```bash
 git clone https://github.com/ThyCitrus/venture.git
@@ -45,7 +45,7 @@ cd venture
 python main.py
 ```
 
-No external dependencies. It's just Python. You'll be fine.
+No external dependencies — standard library only. The `requirements.txt` is included for formality's sake and confirms this.
 
 ---
 
@@ -54,6 +54,7 @@ No external dependencies. It's just Python. You'll be fine.
 ```
 venture/
 ├── main.py               # Entry point and core game loop
+├── requirements.txt      # No dependencies, but it's there
 ├── core/
 │   ├── combat.py         # Combat engine
 │   ├── locations.py      # Location handlers
@@ -75,18 +76,14 @@ venture/
 
 ## Status
 
-Early development. The tutorial arc and Kimaer are playable. Most of the world map is currently geography with labels you can't see unless you actually look through my code (Don't, it's bad, I'm ashamed).
+Early development. The tutorial arc and Kimaer are playable. Most of the world map is currently geography with labels you can't see unless you look through the code. Don't. It's bad. I'm ashamed.
 
 **Planned (not in order):**
 - Fishing minigame
 - Dungeon crawling
 - Additional locations (Lunara, the Gulf, the Lake)
 
-Development doc:
-
-```
-https://docs.google.com/document/d/1618JGgBIqtmNnqrlXR5Ycyos6SO8HVzB-CSbSv6EmsQ/edit?usp=sharing
-```
+**Development doc:** [Google Docs](https://docs.google.com/document/d/1618JGgBIqtmNnqrlXR5Ycyos6SO8HVzB-CSbSv6EmsQ/edit?usp=sharing)
 
 ---
 
