@@ -6,7 +6,13 @@ venture.py - A simple text-based adventure game.
 import json
 import time
 import sys
-from core.display import set_terminal_title, clear, print_color, write_slow
+from core.display import (
+    press_any_key,
+    set_terminal_title,
+    clear,
+    print_color,
+    write_slow,
+)
 from core.utils import location_router, menu_choice
 from core.state import GameState
 
@@ -43,6 +49,20 @@ def show_main_menu() -> None:
     elif choice == 3:
         write_slow("...", 50, 200, 100, 100)
         sys.exit()
+    elif choice == 9:
+        show_credits()
+
+
+def show_credits() -> None:
+    clear()
+    print_color("Venture - Credits", 255, 200, 50)
+    print("==============================")
+    print("Developed by AuxiliaryGames")
+    print("Project Lead -- ThyCitrus")
+    print("Coding -- ThyCitrus, Water890909")
+    print("Story -- ThyCitrus, [Alias]")
+    print("==============================")
+    press_any_key()
 
 
 def start_new_game() -> None:
@@ -94,11 +114,8 @@ set_terminal_title("Venture")
 def boot_intro() -> None:
     clear()
     time.sleep(2)
-    write_slow("Auxiliary Games Presents...", 100, 255, 50, 0)
+    write_slow("AuxiliaryGames Presents...", 100, 255, 50, 0)
     time.sleep(1)
-    print()
-    write_slow("In association with Water890909...", 50, 245, 244, 183)
-    time.sleep(0.5)
     clear()
     print()
     write_slow("                 Venture", 150, 255, 200, 50)
