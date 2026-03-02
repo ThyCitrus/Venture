@@ -72,6 +72,8 @@ venture/
 │   └── hooks.py          # Location-based quest triggers
 ```
 
+No, I will not be updating this as new files are added. I am doing this all for free. Maybe Water will.
+
 ---
 
 ## Status
