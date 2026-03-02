@@ -6,14 +6,8 @@ venture.py - A simple text-based adventure game.
 import json
 import time
 import sys
-from core.classes import *
-from dialogue.kimaer.wilson import *
-from dialogue.kimaer.benji import *
-from dialogue.kimaer.celeste import *
-from dialogue.kimaer.roslin import *
-from dialogue.kimaer.silas import *
-from core.display import set_terminal_title
-from core.utils import location_router
+from core.display import set_terminal_title, clear, print_color, write_slow
+from core.utils import location_router, menu_choice
 from core.state import GameState
 
 # endregion

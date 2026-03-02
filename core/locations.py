@@ -7,7 +7,7 @@ import time
 import random
 import os
 
-from core.state import GameState
+from core.state import GameState, FIGHTER, WARLOCK, ROGUE, PALADIN, CLERIC
 from core.utils import (
     show_hud,
     menu_choice,
@@ -332,7 +332,6 @@ def start_clearing(state: GameState) -> None:
 
 
 def start_character_creation(state: GameState) -> None:
-    from core.classes import FIGHTER, WARLOCK, ROGUE, PALADIN, CLERIC
 
     old_name = state.name  # Track old name for file cleanup
 
