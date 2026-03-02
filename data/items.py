@@ -289,7 +289,7 @@ ITEMS = {
     },
     # region Misc.
     "Journal": {
-        "type": "misc",
+        "type": "journal",
         "value": 0,
         "description": "Your journal.",
         "sellable_to": [],

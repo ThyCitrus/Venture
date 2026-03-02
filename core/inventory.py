@@ -63,7 +63,19 @@ class Inventory:
         return False
 
     def get_by_type(self, item_type: str) -> List[InventoryItem]:
-        """Get all items of a specific type"""
+        """Get all items of a specific type, defaulting unknowns to misc"""
+        # Define what we consider "standard" types
+        known_types = ["weapon", "armor", "potion", "food", "tool", "quest"]
+
+        if item_type == "misc":
+            # Return items explicitly labeled "misc" OR items not in our known list
+            return [
+                item
+                for item in self.items
+                if item.item_type == "misc" or item.item_type not in known_types
+            ]
+
+        # Otherwise, just return the specific type requested
         return [item for item in self.items if item.item_type == item_type]
 
     def display(self) -> None:
@@ -151,7 +163,7 @@ def show_inventory_menu(state: GameState) -> None:
         }
 
         # Build a flat list for selection
-        item_list = ["Journal"]
+        item_list = []
         display_index = 1
 
         for item_type in type_order:
@@ -224,7 +236,6 @@ def interact_with_item(state: GameState, item: InventoryItem) -> None:
     print_color(f"=== {item.name} ===", 255, 200, 100)
     print()
     print(f"Description: {item_data.get('description', 'No description')}")
-    print(f"Type: {item.item_type.title()}")
     print(f"Value: {item.value} gold")
 
     if item.count > 1:

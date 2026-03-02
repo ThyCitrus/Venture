@@ -173,7 +173,9 @@ def show_map(state) -> None:
         except ValueError:
             continue
         if choice == 0:
-            return
+            from core.utils import location_router
+
+            location_router(state)
         if 1 <= choice <= len(keys):
             loc_id = keys[choice - 1]
             fn = travel.get(loc_id)

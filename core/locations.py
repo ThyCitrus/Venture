@@ -434,7 +434,6 @@ def start_character_creation(state: GameState) -> None:
 
             print_color("Finalizing character creation...", 50, 255, 50)
             time.sleep(2)
-            state.inventory.add_item("Journal")
             state.save()
 
             # Delete the old file if name changed
@@ -478,6 +477,7 @@ def start_gameplay(state: GameState) -> None:
                 50,
             )
             time.sleep(2)
+            state.inventory.add_item("Journal")
             kimaer(state)
             break
 
