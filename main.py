@@ -51,6 +51,8 @@ def show_main_menu() -> None:
         sys.exit()
     elif choice.lower() == "credits":
         show_credits()
+    else:
+        show_main_menu()
 
 
 def show_credits() -> None:
