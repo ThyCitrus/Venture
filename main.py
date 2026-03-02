@@ -63,6 +63,7 @@ def show_credits() -> None:
     print("Story -- ThyCitrus, [Alias]")
     print("==============================")
     press_any_key()
+    show_main_menu()
 
 
 def start_new_game() -> None:
