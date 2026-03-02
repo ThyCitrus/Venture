@@ -13,15 +13,16 @@ It's in active development. "Playable" is being used generously here. There isn'
 
 ## Features
 
-- **Character creation** — Name your character, pick a class, pick a race (eventually), and receive a randomly generated color. If you roll three identical values, send me a screenshot. I might put you in the game. Or just, be helpful, that warrants a cameo.
-- **Five playable classes** — Fighter, Warlock, Rogue, Paladin, and Cleric. Each has unique stat modifiers and resource pools (HP, mana, stamina). Some have no mana. Some have no stamina.
-- **Turn-based combat** — Fight enemies using class-specific skills, spells, and techniques that unlock as you level up.
-- **Quest system** — Multi-stage quests with branching dialogue and actual consequences. In theory.
-- **NPC dialogue** — Named characters with distinct personalities, memory of past interactions, and evolving conversations. They're more interesting than I am.
-- **Inventory & shops** — Buy, sell, and manage items across multiple vendors.
-- **ASCII world map** — Handmade. I spent three hours making it, I hope you all like it.
-- **Save/load system** — JSON-based saves tied to your character name.
-- **Journal** — In-game lore entries on characters, enemies, and locations.
+- **Character creation** - Name your character, pick a class, pick a race (eventually), and receive a randomly generated color. If you roll three identical values, send me a screenshot. I might put you in the game. Or just, be helpful, that warrants a cameo.
+- **Five playable classes** - Fighter, Warlock, Rogue, Paladin, and Cleric. Each has unique stat modifiers and resource pools (HP, mana, stamina). Some have no mana. Some have no stamina.
+- **Turn-based combat** - Fight enemies using class-specific skills, spells, and techniques that unlock as you level up.
+- **Quest system** - Multi-stage quests with branching dialogue and actual consequences. In theory.
+- **NPC dialogue** - Named characters with distinct personalities, memory of past interactions, and evolving conversations. They're more interesting than I am.
+- **Inventory & shops** - Buy, sell, and manage items across multiple vendors.
+- **ASCII world map** - Handmade. I spent three hours making it, I hope you all like it.
+- **Save/load system** - JSON-based saves tied to your character name.
+- **Journal** - In-game lore entries on characters, enemies, and locations.
+- **Audio** - Audio. Sound. Something to listen to.
 
 Yes, most of these are just standard RPG features. We'll get to the unique stuff eventually.
 
@@ -37,15 +38,16 @@ Planned locations include Lunara, Duskwood, Eldoria, Frostholm, the Gulf of Burh
 
 ## Getting Started
 
-**Requirements:** Python 3.10+ (developed on 3.12)
+**Requirements:** Python 3.10+ (developed on 3.12), pygame 2.0+, git to be installed
 
 ```bash
+python -m pip install pygame
 git clone https://github.com/ThyCitrus/venture.git
 cd venture
 python main.py
 ```
 
-No external dependencies — standard library only. The `requirements.txt` is included for formality's sake and confirms this.
+One dependency, pygame, is required, above is a series of commands to perform in your terminal (after downloading python) on how to play the game
 
 ---
 
@@ -55,6 +57,7 @@ No external dependencies — standard library only. The `requirements.txt` is in
 venture/
 ├── main.py               # Entry point and core game loop
 ├── requirements.txt      # *A* dependency: pygame
+├── README.md             # You're looking at it
 ├── core/
 |   ├── audio             # FOR MUSIC!! WE HAVE THAT!!
 |   |   ├──music
