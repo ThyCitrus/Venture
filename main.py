@@ -96,6 +96,8 @@ def boot_intro() -> None:
     time.sleep(2)
     write_slow("Auxiliary Games Presents...", 100, 255, 50, 0)
     time.sleep(1)
+    write_slow("In association with Water890909...", 50, 116, 186, 109)
+    time.sleep(0.5)
     clear()
     print()
     write_slow("                 Venture", 150, 255, 200, 50)
