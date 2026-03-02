@@ -21,6 +21,7 @@ from core.display import (
 )
 from core.constants import KIMAER_ROSLIN, KIMAER_CELESTE, KIMAER_WILSON
 from data.items import ITEMS
+from data.journal import unlock_journal_entry
 from quests.quests import is_quest_active
 from quests.hooks import get_location_hook
 from dialogue.kimaer.wilson import wilson_interaction
@@ -468,7 +469,7 @@ def start_gameplay(state: GameState) -> None:
             print("You head west into the unknown...")
         time.sleep(2)
         step_count += 1
-        if step_count % 5 == 0:
+        if step_count == 5:
             write_slow(
                 "You come across a small village. The sign reads 'Kimaer'.",
                 50,
@@ -490,6 +491,7 @@ def start_gameplay(state: GameState) -> None:
 def kimaer(state) -> None:
     state.location = "Kimaer"
     set_terminal_title(f"Venture - {state.location}")
+    unlock_journal_entry(state, "kimaer")
     state.save()
     clear()
 
