@@ -15,6 +15,7 @@ from core.display import (
 )
 from core.utils import location_router, menu_choice
 from core.state import GameState
+from core.audio.music_player import play_music, stop_music, play_sfx
 
 # endregion
 
@@ -36,6 +37,7 @@ KIMAER_SILAS = "kimaer_silas"
 # region Game Functions
 def show_main_menu() -> None:
     set_terminal_title("Venture - Main Menu")
+    play_music("core/audio/music/test.mp3")
     clear()
     print("==============================")
     print_color("      Welcome to Venture", 255, 200, 50)

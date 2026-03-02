@@ -33,6 +33,7 @@ from dialogue.kimaer.roslin import (
     roslin_gives_broomstick,
 )
 from dialogue.kimaer.silas import silas_interaction
+from core.audio import play_music, stop_music, play_sfx
 
 
 # ---------------------------------------------------------------------------
