@@ -45,7 +45,7 @@ SHOP_DATA = {
         "word": "Store",
         "base_items": {"Parchment": 12, "Bread": 5, "Rope": 8},
         "location_items": {
-            "Kimaer": {"Fishing Rod": 25, "Basic Lure": 1},
+            "Kimaer": {"Fishing Rod": 25, "Worm": 1},
             "Lunara": {"Moon Charm": 30},
         },
         "npcs": {
@@ -544,7 +544,7 @@ def kimaer(state) -> None:
         from quests.quests import get_active_quest
 
         quest = get_active_quest(state, "celeste_rats")
-        if quest and quest.current_stage == (1, 2):
+        if quest and quest.current_stage in (1, 2):
             if not state.equipped_weapon:
                 clear()
                 print()

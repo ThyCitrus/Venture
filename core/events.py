@@ -95,7 +95,7 @@ def alchemy_shop_rat_combat(state):
         Enemy("Giant Rat"),
     ]
 
-    play_music("core\audio\music\Seen By The Flesh Of Agony - VENTURE OST.mp3")
+    play_music("core/audio/music/Seen By The Flesh Of Agony - VENTURE OST.mp3")
     won = combat(state, enemies)
 
     if won:
