@@ -9,7 +9,7 @@ ENEMIES = {
         "item_drops": [
             ("Rat Tail", 0.3),
         ],
-        "description": "A cancerous rodent, that deserves nothing but death",
+        "description": "A cancerous rodent. Deserves nothing but death",
         "difficulty": 0.8,
         "exp_drop": (3, 5),
     },

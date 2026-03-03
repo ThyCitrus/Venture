@@ -395,7 +395,6 @@ def sleep(state: GameState, location: str = "unknown") -> None:
 
 
 def show_journal(state: GameState) -> None:
-    """Display the journal menu."""
     while True:
         clear()
         print_color("=== Journal ===", 255, 200, 100)
@@ -404,41 +403,76 @@ def show_journal(state: GameState) -> None:
         if not state.journal_entries:
             print("Your journal is empty.")
             print()
-            press_any_key("Press any key to return...")
+            press_any_key()
             return
 
-        # Group unlocked entries by category
-        grouped = {cat: [] for cat in CATEGORY_ORDER}
+        # Collect unlocked entries grouped by subject
+        subjects = {}
         for key in state.journal_entries:
             entry = JOURNAL_ENTRIES.get(key)
-            if entry:
-                grouped[entry["category"]].append((key, entry))
+            if not entry:
+                continue
+            subj = entry.get("subject", key)
+            if subj not in subjects:
+                subjects[subj] = {"category": entry["category"], "entries": []}
+            subjects[subj]["entries"].append((key, entry))
 
-        # Build flat display list
-        display = []
-        for cat in CATEGORY_ORDER:
-            entries = grouped[cat]
-            if entries:
-                print_color(f"\n=== {CATEGORY_LABELS[cat]} ===", 255, 200, 100)
-                for key, entry in entries:
-                    print(f"{len(display) + 1}. {entry['title']}")
-                    display.append((key, entry))
+        for subj in subjects:
+            subjects[subj]["entries"].sort(key=lambda x: x[1].get("order", 0))
 
-        print()
-        choice = menu_choice([e["title"] for _, e in display] + ["Close"])
+        # Only show categories that have unlocked entries
+        active_cats = [
+            c
+            for c in CATEGORY_ORDER
+            if any(d["category"] == c for d in subjects.values())
+        ]
 
-        if choice == len(display) + 1:
+        choice = menu_choice([CATEGORY_LABELS[c] for c in active_cats] + ["Close"])
+        if choice == len(active_cats) + 1:
             return
 
-        # Show selected entry
-        key, entry = display[choice - 1]
+        selected_cat = active_cats[choice - 1]
+
+        # Drill into category
+        cat_subjects = sorted(
+            [(s, d) for s, d in subjects.items() if d["category"] == selected_cat],
+            key=lambda x: x[0],
+        )
+
+        while True:
+            clear()
+            print_color(f"=== {CATEGORY_LABELS[selected_cat]} ===", 255, 200, 100)
+            print()
+
+            choice2 = menu_choice(
+                [d["entries"][0][1]["title"] for _, d in cat_subjects] + ["Back"]
+            )
+            if choice2 == len(cat_subjects) + 1:
+                break
+
+            _, data = cat_subjects[choice2 - 1]
+            _show_subject_entries(state, data["entries"])
+
+
+def _show_subject_entries(state, entries):
+    while True:
+        clear()
+        first_title = entries[0][1]["title"]
+        print_color(f"=== {first_title} ===", 255, 200, 100)
+        print()
+
+        choice = menu_choice([e["title"] for _, e in entries] + ["Back"])
+
+        if choice == len(entries) + 1:
+            return
+
+        key, entry = entries[choice - 1]
         clear()
         print_color(f"=== {entry['title']} ===", 255, 200, 100)
-        print_color(f"[{CATEGORY_LABELS[entry['category']]}]", 150, 150, 150)
         print()
         print(entry["text"])
         print()
-        press_any_key("Press any key to return...")
+        press_any_key()
 
 
 def location_router(state: GameState) -> None:
