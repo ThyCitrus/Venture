@@ -65,7 +65,7 @@ def show_credits() -> None:
     print("Project Lead -- ThyCitrus")
     print("Coding -- ThyCitrus, Water890909")
     print("Story -- ThyCitrus, B R E A D")
-    print("Soundtrack -- TBD")
+    print("Soundtrack -- Drantom")
     print("==============================")
     press_any_key()
     show_main_menu()
