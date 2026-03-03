@@ -62,7 +62,6 @@ def show_credits() -> None:
     print_color("Venture - Credits", 255, 200, 50)
     print("==============================")
     print("Developed by AuxiliaryGames")
-    print("Project Lead -- ThyCitrus")
     print("Coding -- ThyCitrus, Water890909")
     print("Story -- ThyCitrus, B R E A D")
     print("Soundtrack -- Drantom")
