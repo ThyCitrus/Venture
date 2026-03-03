@@ -352,7 +352,7 @@ def celeste_rat_quest_panic(state):
     )
     print()
 
-    choice = menu_choice(["Of course", "Not right now"], state)
+    choice = menu_choice(["Of course", "Not right now"])
 
     if choice == 1:
         write_slow(

@@ -1,4 +1,5 @@
 import time
+from core.audio.music_player import play_music
 from core.display import clear, write_slow, press_any_key
 from core.locations import kimaer, shop
 
@@ -94,6 +95,7 @@ def alchemy_shop_rat_combat(state):
         Enemy("Giant Rat"),
     ]
 
+    play_music("core\audio\music\Seen By The Flesh Of Agony - VENTURE OST.mp3")
     won = combat(state, enemies)
 
     if won:

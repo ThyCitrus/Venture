@@ -37,24 +37,21 @@ KIMAER_SILAS = "kimaer_silas"
 # region Game Functions
 def show_main_menu() -> None:
     set_terminal_title("Venture - Main Menu")
-    play_music("core/audio/music/test.mp3")
     clear()
     print("==============================")
     print_color("      Welcome to Venture", 255, 200, 50)
     print("==============================")
     print()
-    choice = input("1. Start New Game\n2. Load Game\n3. Exit\n\n\n  ")
-    if choice == "1":
+    choice = menu_choice(["Start New Game", "Load Game", "Credits", "Exit"])
+    if choice == 1:
         start_new_game()
-    elif choice == "2":
+    elif choice == 2:
         load_game()
-    elif choice == "3":
+    elif choice == 3:
+        show_credits()
+    elif choice == 4:
         write_slow("...", 50, 200, 100, 100)
         sys.exit()
-    elif choice.lower() == "credits":
-        show_credits()
-    else:
-        show_main_menu()
 
 
 def show_credits() -> None:
