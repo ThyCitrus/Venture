@@ -8,12 +8,12 @@ QUEST_HOOKS = {
 
 
 def get_location_hook(state, location_key):
-    import main
+    from core import events
 
     hooks = QUEST_HOOKS.get(location_key, {})
     for quest in state.active_quests:
         hook_key = f"{quest.quest_id}:{quest.current_stage}"
         if hook_key in hooks:
             func_name = hooks[hook_key]
-            return getattr(main, func_name, None)
+            return getattr(events, func_name, None)
     return None

@@ -364,7 +364,7 @@ def celeste_rat_quest_panic(state):
         )
         time.sleep(1)
         write_slow(
-            "\n Roslin might have something. Tell her it's for - tell her Celeste sent you...",
+            "\n Roslin might have something. Tell her it's for- tell her Celeste sent you...",
             50,
             R,
             G,
