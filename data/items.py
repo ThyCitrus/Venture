@@ -221,12 +221,6 @@ ITEMS = {
         "sellable_to": [],
     },
     # region Tools
-    "Fishing Rod": {
-        "type": "tool",
-        "value": 25,
-        "description": "Used for fishing",
-        "sellable_to": [],
-    },
     "Rope": {
         "type": "tool",
         "value": 8,
@@ -354,7 +348,7 @@ ITEMS = {
         "description": "A remarkable blue gem",
         "sellable_to": [],
     },
-    # region Fishing Stuff
+    # region Bait
     "Worm": {
         "type": "bait",
         "value": 1,
@@ -372,5 +366,95 @@ ITEMS = {
         "value": 50,
         "description": "A rare insect that lives in mountains and caves. I'll name it Maurice",
         "sellable_to": [],
+    },
+    # region Rods
+    "Fishing Rod": {
+        "type": "tool",
+        "value": 25,
+        "description": "Used for fishing",
+        "sellable_to": [],
+        "rod_width": 5,
+        "drain_ratio": 2.0,  # drain:gain — 2 units drained per 1 gained
+    },
+    # region Fish
+    "Common Perch": {
+        "type": "fish",
+        "value": 3,
+        "description": "A small, unremarkable fish. Still edible.",
+        "sellable_to": [],
+        "difficulty": 0.13,
+        "affinity": ["Worm"],
+    },
+    "Mudskipper": {
+        "type": "fish",
+        "value": 5,
+        "description": "Ugly little thing. Tastes better than it looks.",
+        "sellable_to": [],
+        "difficulty": 0.2,
+        "affinity": ["Worm"],
+    },
+    "Silver Darter": {
+        "type": "fish",
+        "value": 12,
+        "description": "Quick and shiny. Popular at market.",
+        "sellable_to": [],
+        "difficulty": 0.3,
+        "affinity": ["Worm", "Bright Bug"],
+    },
+    "Glowfin": {
+        "type": "fish",
+        "value": 20,
+        "description": "Faintly luminescent fins. Celeste would probably want this.",
+        "sellable_to": [],
+        "difficulty": 0.45,
+        "affinity": ["Bright Bug"],
+    },
+    "Ironscale Carp": {
+        "type": "fish",
+        "value": 18,
+        "description": "Heavy and armored. A fight to land.",
+        "sellable_to": [],
+        "difficulty": 0.5,
+        "affinity": ["Worm", "Stone Fly"],
+    },
+    "Deepwater Eel": {
+        "type": "fish",
+        "value": 30,
+        "description": "Long, dark, unnerving. Delicious smoked.",
+        "sellable_to": [],
+        "difficulty": 0.6,
+        "affinity": ["Bright Bug"],
+    },
+    "Thornback": {
+        "type": "fish",
+        "value": 40,
+        "description": "Handle with care. Spines will draw blood.",
+        "sellable_to": [],
+        "difficulty": 0.7,
+        "affinity": ["Stone Fly"],
+    },
+    "Gilded Trout": {
+        "type": "fish",
+        "value": 65,
+        "description": "Gold-flecked scales. Rare and beautiful.",
+        "sellable_to": [],
+        "difficulty": 0.8,
+        "affinity": ["Bright Bug", "Stone Fly"],
+    },
+    "Abyssal Lurker": {
+        "type": "fish",
+        "value": 90,
+        "description": "Nobody's sure what it eats down there.",
+        "sellable_to": [],
+        "difficulty": 0.9,
+        "affinity": ["Stone Fly"],
+    },
+    "Leviathan Fry": {
+        "type": "fish",
+        "value": 150,
+        "description": "A juvenile of something much, much larger. Best not to think about it.",
+        "sellable_to": [],
+        "difficulty": 1.0,
+        "affinity": ["Stone Fly"],
     },
 }

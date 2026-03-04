@@ -7,6 +7,7 @@ import time
 import random
 import os
 
+from core.minigames import fishing_minigame
 from core.state import GameState, FIGHTER, WARLOCK, ROGUE, PALADIN, CLERIC
 from core.utils import (
     show_hud,
@@ -548,7 +549,6 @@ def kimaer(state) -> None:
         from quests.quests import get_active_quest
 
         if getattr(state, "celeste_declined", False):
-            from dialogue.kimaer.celeste import celeste_rat_quest_panic
 
             celeste_ratq_after_decline(state)
             return

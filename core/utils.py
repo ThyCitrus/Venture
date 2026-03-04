@@ -2,6 +2,7 @@ import os
 import sys
 import time
 from typing import TYPE_CHECKING, List
+import select as _select
 
 from core.state import GameState
 from data.journal import CATEGORY_LABELS, CATEGORY_ORDER, JOURNAL_ENTRIES
@@ -500,3 +501,53 @@ def location_router(state: GameState) -> None:
         )
         time.sleep(2)
         kimaer(state)
+
+
+def _setup_terminal():
+    try:
+        import termios, tty
+
+        fd = sys.stdin.fileno()
+        old = termios.tcgetattr(fd)
+        tty.setcbreak(fd)
+        return fd, old
+    except ImportError:
+        return None
+
+
+def _restore_terminal(saved):
+    if saved is None:
+        return
+    try:
+        import termios
+
+        fd, old = saved
+        termios.tcsetattr(fd, termios.TCSADRAIN, old)
+    except Exception:
+        pass
+
+
+def _read_char_timeout(timeout: float, accept: set = None):
+    try:
+        import termios
+
+        deadline = time.time() + timeout
+        while True:
+            remaining = deadline - time.time()
+            if remaining <= 0:
+                return None
+            if _select.select([sys.stdin], [], [], min(0.02, remaining))[0]:
+                ch = sys.stdin.read(1).lower()
+                if accept is None or ch in accept:
+                    return ch
+    except ImportError:
+        import msvcrt
+
+        deadline = time.time() + timeout
+        while time.time() < deadline:
+            if msvcrt.kbhit():
+                ch = msvcrt.getch().decode("utf-8", errors="ignore").lower()
+                if accept is None or ch in accept:
+                    return ch
+            time.sleep(0.01)
+        return None

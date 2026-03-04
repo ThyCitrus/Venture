@@ -86,10 +86,11 @@ class Inventory:
             return
 
         # Group by type
-        types_order = ["weapon", "armor", "potion", "quest", "misc"]
+        types_order = ["weapon", "armor", "tool", "potion", "quest", "misc"]
         type_names = {
             "weapon": "Weapons",
             "armor": "Armor",
+            "tool": "Tools",
             "potion": "Potions",
             "quest": "Quest Items",
             "misc": "Miscellaneous",
@@ -136,7 +137,6 @@ def show_inventory_menu(state: GameState) -> None:
     from core.utils import (
         location_router,
         menu_choice,
-        show_journal,
     )
 
     while True:
@@ -151,13 +151,13 @@ def show_inventory_menu(state: GameState) -> None:
             return
 
         # Sort items by type
-        type_order = ["weapon", "armor", "potion", "food", "tool", "quest", "misc"]
+        type_order = ["weapon", "armor", "tool", "potion", "food", "quest", "misc"]
         type_names = {
             "weapon": "Weapons",
             "armor": "Armor",
+            "tool": "Tools",
             "potion": "Potions",
             "food": "Food",
-            "tool": "Tools",
             "quest": "Quest Items",
             "misc": "Miscellaneous",
         }

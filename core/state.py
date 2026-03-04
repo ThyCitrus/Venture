@@ -30,6 +30,7 @@ class GameState:
         self.wilson_room_access: bool = False
         self.equipped_weapon: Optional[str] = None
         self.equipped_armor: Optional[str] = None
+        self.equipped_rod: Optional[str] = None
         self.active_quests: List = []
         self.completed_quests: List[str] = []
         self.active_effects: list = []
