@@ -2,13 +2,13 @@
   "name": "Anon",
   "player_color": "226 55 173",
   "location": "Kimaer",
-  "health": 120,
+  "health": 117,
   "max_health": 120,
   "mana": 48,
   "max_mana": 48,
   "stamina": 48,
   "max_stamina": 48,
-  "gold": 9,
+  "gold": 15,
   "inventory": [
     {
       "name": "Journal",
@@ -21,10 +21,16 @@
       "item_type": "weapon",
       "count": 1,
       "value": 0
+    },
+    {
+      "name": "Rat Tail",
+      "item_type": "ingrediant",
+      "count": 1,
+      "value": 1
     }
   ],
   "level": 1,
-  "xp": 0,
+  "xp": 13,
   "next_level": 100,
   "player_class": "Paladin",
   "race": "Human",
