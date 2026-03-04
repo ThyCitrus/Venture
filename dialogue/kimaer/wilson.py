@@ -490,7 +490,7 @@ def wilson_repeat_greeting(state):
 
 def wilson_work_shift(state):
     """Start a work shift at Wilson's bar"""
-    from core.utils import bar_serving_minigame
+    from core.minigames import bar_serving_minigame
 
     r, g, b = get_player_color(state)
 
