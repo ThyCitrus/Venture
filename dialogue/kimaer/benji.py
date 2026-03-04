@@ -62,6 +62,7 @@ def benji_first_meeting(state):
         255,
     )
     print()
+    unlock_journal_entry(state, "benji")
     press_any_key()
 
 
@@ -72,7 +73,6 @@ def benji_repeat_meeting(state):
     quote = random.choice(BENJI_QUOTES)
     write_slow(f" {quote}", 50, R, G, B)
     print()
-    unlock_journal_entry(state, "benji")
     press_any_key()
 
 

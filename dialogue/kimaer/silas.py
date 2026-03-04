@@ -53,6 +53,7 @@ def silas_first_encounter(state):
         B,
     )
     print()
+    unlock_journal_entry(state, "silas")
     press_any_key()
 
 
@@ -85,7 +86,6 @@ def silas_repeat_encounter(state):
         B,
     )
     print()
-    unlock_journal_entry(state, "silas")
     press_any_key()
 
 

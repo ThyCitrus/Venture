@@ -25,8 +25,6 @@ def trigger_rat_quest(state):
     print()
     press_any_key()
 
-    # Set flag so this doesn't repeat
-    state.rat_quest_triggered = True
     state.save()
 
     # Route to special Kimaer event

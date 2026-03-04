@@ -26,7 +26,11 @@ from quests.quests import is_quest_active
 from quests.hooks import get_location_hook
 from dialogue.kimaer.wilson import wilson_interaction
 from dialogue.kimaer.benji import benji_interaction
-from dialogue.kimaer.celeste import celeste_first_meeting, celeste_repeat_greeting
+from dialogue.kimaer.celeste import (
+    celeste_first_meeting,
+    celeste_ratq_after_decline,
+    celeste_repeat_greeting,
+)
 from dialogue.kimaer.roslin import (
     roslin_first_meeting,
     roslin_repeat_greeting,
@@ -543,26 +547,30 @@ def kimaer(state) -> None:
     elif choice == 2:
         from quests.quests import get_active_quest
 
+        if getattr(state, "celeste_declined", False):
+            from dialogue.kimaer.celeste import celeste_rat_quest_panic
+
+            celeste_ratq_after_decline(state)
+            return
+
         quest = get_active_quest(state, "celeste_rats")
-        if quest and quest.current_stage in (1, 2):
-            if not state.equipped_weapon:
-                clear()
-                print()
-                write_slow(
-                    "You grip the door handle, then hesitate.", 50, 255, 255, 255
-                )
-                time.sleep(1)
-                write_slow(
-                    "Going in there unarmed would be suicide. You should equip the broomstick first.",
-                    50,
-                    255,
-                    200,
-                    50,
-                )
-                print()
-                press_any_key()
-                kimaer(state)
-                return
+        if quest and quest.current_stage in (1, 2) and not state.equipped_weapon:
+            clear()
+            print()
+            write_slow("You grip the door handle, then hesitate.", 50, 255, 255, 255)
+            time.sleep(1)
+            write_slow(
+                "Going in there unarmed would be suicide. You should equip the broomstick first.",
+                50,
+                255,
+                200,
+                50,
+            )
+            print()
+            press_any_key()
+            kimaer(state)
+            return
+
         hook = get_location_hook(state, "kimaer_alchemy")
         if hook:
             hook(state)

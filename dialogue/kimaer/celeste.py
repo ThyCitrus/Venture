@@ -375,17 +375,61 @@ def celeste_rat_quest_panic(state):
         start_quest(state, "celeste_rats")
         unlock_journal_entry(state, "celeste_rats")
         advance_quest(state, "celeste_rats")
+        state.celeste_declined = False
+        state.rat_quest_triggered = True
         print_color("New Quest: A Scream in the Night", 255, 200, 50)
         print()
         press_any_key()
     else:
+        state.celeste_declined = True
+        state.save()
+        write_slow("\n Très bien. I will... manage.", 50, R, G, B)
+        print()
+        press_any_key()
+
+
+def celeste_ratq_after_decline(state):
+    """No cutscene, retrigger first quest"""
+    from quests.quests import start_quest, advance_quest
+
+    r, g, b = get_player_color(state)
+
+    write_slow(
+        " Celeste catches your eye as you approach the shop door.", 50, 255, 255, 255
+    )
+    print()
+    write_slow("\n ...You. Will you help me or not?", 50, R, G, B)
+    print()
+
+    choice = menu_choice(["Of course", "Not right now"])
+
+    if choice == 1:
         write_slow(
-            "\n Très bien. I will... manage.",
+            "\n Bon... merci. You will need a weapon.",
             50,
             R,
             G,
             B,
         )
+        time.sleep(1)
+        write_slow(
+            "\n Roslin might have something. Tell her it's for- tell her Celeste sent you...",
+            50,
+            R,
+            G,
+            B,
+        )
+        print()
+
+        start_quest(state, "celeste_rats")
+        unlock_journal_entry(state, "celeste_rats")
+        advance_quest(state, "celeste_rats")
+        state.celeste_declined = False
+        state.rat_quest_triggered = True
+        print_color("New Quest: A Scream in the Night", 255, 200, 50)
+        print()
+    else:
+        write_slow("\n Très bien.", 50, R, G, B)
         print()
         press_any_key()
 

@@ -242,8 +242,6 @@ def wilson_first_meeting(state):
                     # Set job flag in state
                     if not hasattr(state, "wilson_employee"):
                         state.wilson_employee = True
-                    if not hasattr(state, "wilson_room_access"):
-                        state.wilson_room_access = True
                     topics["job_offered"] = True
                     press_any_key()
                     break
@@ -258,8 +256,6 @@ def wilson_first_meeting(state):
                             G,
                             B,
                         )
-                        if not hasattr(state, "wilson_room_access"):
-                            state.wilson_room_access = True
                     else:
                         write_slow(
                             " You're short. Offer stands if you change your mind.",
@@ -424,7 +420,6 @@ def wilson_job_offer(state):
             B,
         )
         state.wilson_employee = True
-        state.wilson_room_access = True
         print()
         wilson_work_shift(state)
     else:
@@ -439,60 +434,58 @@ def wilson_job_offer(state):
 
 
 def wilson_repeat_greeting(state):
-    """Called when player talks to Wilson after first meeting"""
     r, g, b = get_player_color(state)
-
     topics = state.npc_topics_asked.get("wilson", {})
-    has_unasked = not all(topics.values())
 
-    if has_unasked:
+    if not all(topics.values()):
         wilson_additional_questions(state)
         return
 
-    # Check if employee
-    if hasattr(state, "wilson_employee") and state.wilson_employee:
-        greetings = [
-            f" {state.name}. Ready for another shift?",
-            " Back to work? Good.",
-            " Bar needs tending. You in?",
-        ]
-    else:
-        greetings = [
-            f" {state.name}. Welcome back.",
-            " Back for more? Good.",
-            " You again. Ale or questions?",
-        ]
-
     import random
 
-    greeting = random.choice(greetings)
-    write_slow(greeting, 50, R, G, B)
+    greetings = [
+        f" {state.name}. Back again.",
+        f" {state.name}. What do you need?",
+        " You again. Something I can help you with?",
+    ]
+    write_slow(random.choice(greetings), 50, R, G, B)
+    print()
+    write_slow(" Need a place to stay?", 50, R, G, B)
     print()
 
-    choice = menu_choice(["Work at the bar", "Rent a room (20 gold)", "Leave"])
+    choice = menu_choice(["Yes", "No"])
+
     if choice == 1:
-        wilson_work_shift(state)
-    elif choice == 2:
-        if state.gold >= 20:
-            state.gold -= 20
-            print_color("Paid 20 gold for the room.", 200, 255, 200)
-            time.sleep(1)
+        write_slow(" Room's twenty gold. Or work a shift and it's free.", 50, R, G, B)
+        print()
+        job_choice = menu_choice(["Work a shift", "Pay 20 gold", "Never mind"])
 
-            from core.utils import sleep
+        if job_choice == 1:
+            wilson_work_shift(state)
+        elif job_choice == 2:
+            if state.gold >= 20:
+                state.gold -= 20
+                print_color("Paid 20 gold for the room.", 200, 255, 200)
+                from core.utils import sleep
 
-            sleep(state, "wilson_bar")
+                sleep(state, "wilson_bar")
+                if not state.rat_quest_triggered:
+                    from core.events import trigger_rat_quest
 
-            # Trigger rat quest if not yet triggered
-            if not hasattr(state, "rat_quest_triggered"):
-                state.rat_quest_triggered = False
-
-            if not state.rat_quest_triggered:
-                from core.events import trigger_rat_quest
-
-                trigger_rat_quest(state)
+                    trigger_rat_quest(state)
+            else:
+                print_color(
+                    f"Not enough gold! Need 20, have {state.gold}.", 255, 100, 100
+                )
+                time.sleep(2)
         else:
-            print_color(f"Not enough gold! Need 20, have {state.gold}.", 255, 100, 100)
-            time.sleep(2)
+            write_slow(" Suit yourself.", 50, R, G, B)
+            print()
+            press_any_key()
+    else:
+        write_slow(" Right. Bar's there if you want a drink.", 50, R, G, B)
+        print()
+        press_any_key()
 
 
 def wilson_work_shift(state):
@@ -558,7 +551,6 @@ def wilson_work_shift(state):
         )
 
     state.gold += payment
-    state.wilson_room_access = True
     press_any_key()
 
     from core.utils import sleep
