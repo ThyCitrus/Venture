@@ -19,6 +19,7 @@ from core.audio.music_player import play_music, stop_music, play_sfx
 
 # endregion
 
+# Change in main so I can push and change the commit message so that way I don't confuse anyone
 
 # location ideas: ["Kimaer", "Lunara", "Duskwood", "Eldoria", "Frostholm", "Lake", "Cave", "Gulf of Burhkeria", "Nyctos Deep"]
 
