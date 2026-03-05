@@ -1,0 +1,16 @@
+# Venture - Requirements
+# Python 3.10+ required (developed on 3.12).
+
+# Also, it is highly recommended to run the game via a maximized window with default font size, otherwise things may not render properly
+
+
+# To download modules from requirements.txt,
+# change directory to Venture, and run:
+
+#                                pip install -r requirements.txt
+#                                      OR
+#                                python -m pip install -r requirements.txt
+
+
+# Modules
+pygame==2.0
