@@ -98,3 +98,9 @@ Early development. The tutorial arc and Kimaer are playable. Most of the world m
 ## License
 
 Not licensed for redistribution. All rights reserved.
+
+## Help
+
+FUCKKKKKKKKKKKKKKKK
+
+WATER! I BROKE EVERYTHING FUCK
