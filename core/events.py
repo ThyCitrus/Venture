@@ -1,14 +1,12 @@
 import time
 from core.audio.music_player import play_music
-from core.display import clear, write_slow, press_any_key
+from core.display import clear, print_color, write_slow, press_any_key
 from core.locations import kimaer, shop
-
-# region Events
+from core.utils import menu_choice
 
 
 def trigger_rat_quest(state):
     """Called after first sleep - triggers rat quest"""
-    from dialogue.kimaer.celeste import celeste_rat_quest_panic
 
     clear()
     print()
@@ -59,7 +57,7 @@ def kimaer_rat_event(state):
 def alchemy_shop_rat_combat(state):
     """Combat encounter in the alchemy shop"""
     from core.combat import combat, Enemy
-    from quests.quests import is_quest_active, get_active_quest
+    from quests.quests import get_active_quest
     from dialogue.kimaer.celeste import celeste_quest_complete
 
     # Check if quest is at the right stage
@@ -105,4 +103,33 @@ def alchemy_shop_rat_combat(state):
         kimaer(state)
 
 
-# endregion
+def trigger_fish_quest(state):
+    # These names will liekly have to get more creative eventually, more specifc...
+    """Called after finishing rat_quest, triggers Roslin cutscene about fishing and being helpful and world-building nonsense"""
+
+    write_slow(
+        "As you exit the alchemy shop, you notice Roslin standing by the village well."
+    )
+    print("\n\n")
+    write_slow(
+        "Mmh, you sure handled yourself well, I've definitely seen worse performances with greater weapons.\n",
+        50,
+        200,
+        250,
+        150,
+    )
+    write_slow(
+        "And you helped her without a fuss, now that's something, hm?\n",
+        50,
+        200,
+        250,
+        150,
+    )
+    write_slow(
+        "Perhaps you'd do something else? Something for me?\n\n", 100, 200, 250, 150
+    )
+    choice = menu_choice(["What is it?", "Of course"])
+    if choice == 1:
+        "placeholder"
+    elif choice == 2:
+        "placeholder"

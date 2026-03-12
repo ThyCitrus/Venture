@@ -90,35 +90,25 @@ QUESTS = {
             "exp": 50,
         },
     },
-    "wilson_supplies": {
-        "name": "Bar Supplies",
-        "description": "Wilson needs supplies from the general store.",
+    "roslin_fishing": {
+        "name": "A Quiet Catch",
+        "description": "Roslin thinks you should get some fish for Celeste after the rat problem.",
         "stages": [
-            "Talk to Wilson",
-            "Buy supplies from Roslin",
-            "Return to Wilson",
-            "Buy fishing rod from Roslin",
-            "Open the map and select 'Gulf of Burhkeria'",
-            "Return to Wilson about the triton",
-            "Open the map and select 'Lake'",
+            "Talk to Roslin",  # Likely done manually via forced cutscene post-rat_quest
+            "Buy fishing supplies from Roslin",
+            "Open the map and travel to the Gulf of Burhkeria",
+            "Cast your line",  # Triton or merfolk-adjacent stops you
+            "Return to Roslin",  # Tell Roslin you can't fish, unlocks lake
+            "Open the map and travel to the Lake",
+            "Catch three fish",
+            "Return to Roslin",
+            "Give the fish to Celeste",
         ],
         "rewards": {
-            # Spare gold
-            "exp": 50,
-        },
-    },
-    "benji_mystery": {
-        "name": "The Gnome's Riddle",
-        "description": "Benji has a cryptic message for you.",
-        "stages": [
-            "Talk to Benji",
-            "Decipher his riddle",
-            "Find the hidden object",
-            "Return to Benji",
-        ],
-        "rewards": {
-            "items": ["Ancient Scroll"],
-            "exp": 100,
+            "exp": 75,
+            # And also relationship progress with Celeste, maybe some plot,
+            # but definitely her becoming increasingly flustered, eg:
+            # "I couldn't possibly... ... you've already done so much..."
         },
     },
 }

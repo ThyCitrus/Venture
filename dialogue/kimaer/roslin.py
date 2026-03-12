@@ -338,3 +338,7 @@ def roslin_gives_broomstick(state):
     print_color("Quest Updated: Return to the Alchemy Shop", 255, 200, 50)
     print()
     press_any_key()
+
+
+def roslin_fish_quest(state):
+    """Post-rat_quest, second quest, unlocsk fishing and gulf/lake areas, fish-people interactions, etc"""
