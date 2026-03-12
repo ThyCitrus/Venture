@@ -3,6 +3,7 @@ from core.utils import get_player_color, menu_choice
 import time
 from core.constants import KIMAER_CELESTE
 from data.journal import unlock_journal_entry
+from quests.quests import start_quest, advance_quest
 
 R, G, B = 200, 20, 140
 
@@ -314,7 +315,6 @@ def celeste_repeat_greeting(state):
 
 def celeste_rat_quest_panic(state):
     """Celeste panicking about rats - FIRST ENCOUNTER"""
-    from quests.quests import start_quest, advance_quest
 
     r, g, b = get_player_color(state)
 
@@ -390,7 +390,6 @@ def celeste_rat_quest_panic(state):
 
 def celeste_ratq_after_decline(state):
     """No cutscene, retrigger first quest"""
-    from quests.quests import start_quest, advance_quest
 
     r, g, b = get_player_color(state)
 
@@ -436,7 +435,6 @@ def celeste_ratq_after_decline(state):
 
 def celeste_quest_complete(state):
     """Quest completion"""
-    from quests.quests import advance_quest
 
     r, g, b = get_player_color(state)
 

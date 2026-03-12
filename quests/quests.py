@@ -106,9 +106,11 @@ QUESTS = {
         ],
         "rewards": {
             "exp": 75,
+            "gold": 50,
             # And also relationship progress with Celeste, maybe some plot,
             # but definitely her becoming increasingly flustered, eg:
             # "I couldn't possibly... ... you've already done so much..."
+            # "I insist, I'll give you some gold for them, I can't accept more of your generosity..."
         },
     },
 }

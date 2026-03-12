@@ -106,13 +106,14 @@ def alchemy_shop_rat_combat(state):
 def trigger_fish_quest(state):
     # These names will liekly have to get more creative eventually, more specifc...
     """Called after finishing rat_quest, triggers Roslin cutscene about fishing and being helpful and world-building nonsense"""
+    from dialogue.kimaer.roslin import roslin_fish_quest, roslin_fish_quest_flavor
 
     write_slow(
         "As you exit the alchemy shop, you notice Roslin standing by the village well."
     )
     print("\n\n")
     write_slow(
-        "Mmh, you sure handled yourself well, I've definitely seen worse performances with greater weapons.\n",
+        "Mmh, you sure handled yourself well, sprout, I've definitely seen worse performances with greater weapons.\n",
         50,
         200,
         250,
@@ -130,6 +131,6 @@ def trigger_fish_quest(state):
     )
     choice = menu_choice(["What is it?", "Of course"])
     if choice == 1:
-        "placeholder"
+        roslin_fish_quest(state)
     elif choice == 2:
-        "placeholder"
+        roslin_fish_quest_flavor(state)

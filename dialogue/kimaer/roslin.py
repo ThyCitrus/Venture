@@ -1,9 +1,11 @@
 from core.display import write_slow, press_any_key, print_color
+from core.locations import kimaer
 from core.utils import get_player_color, menu_choice
 import time
 
 from core.constants import KIMAER_ROSLIN
 from data.journal import unlock_journal_entry
+from quests.quests import advance_quest, is_quest_active, start_quest
 
 R, G, B = 200, 250, 150
 
@@ -297,7 +299,6 @@ def roslin_repeat_greeting(state):
 
 def roslin_gives_broomstick(state):
     """Roslin gives player the starting weapon"""
-    from quests.quests import advance_quest, is_quest_active
 
     if not is_quest_active(state, "celeste_rats"):
         return
@@ -342,8 +343,37 @@ def roslin_gives_broomstick(state):
 
 def roslin_fish_quest_flavor(state):
     """Small bit of flavor text for being eager to help, does nothing"""
-    write_slow("That's what I like about you, so eager to help others.")
+    write_slow(
+        "That's what I like about you, so eager to help others, I think you'll do great things...",
+        100,
+        R,
+        G,
+        B,
+    )
+    roslin_fish_quest(state)
 
 
 def roslin_fish_quest(state):
     """Post-rat_quest, second quest, unlocsk fishing and gulf/lake areas, fish-people interactions, etc"""
+
+    write_slow(
+        "Whenever you're free, no rush, I've got a fishing rod and bait you could buy, if you're interested.",
+        50,
+        R,
+        G,
+        B,
+    )
+    write_slow(
+        "I may also have some worms from my garden I could get for you, wouldn't be much, but it would be better than casting an empty hook, hm?",
+        50,
+        R,
+        G,
+        B,
+    )
+
+    start_quest("roslin_fish")
+    advance_quest("roslin_fish")
+    state.save()
+
+    press_any_key()
+    kimaer(state)
