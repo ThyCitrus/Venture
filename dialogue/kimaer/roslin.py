@@ -340,5 +340,10 @@ def roslin_gives_broomstick(state):
     press_any_key()
 
 
+def roslin_fish_quest_flavor(state):
+    """Small bit of flavor text for being eager to help, does nothing"""
+    write_slow("That's what I like about you, so eager to help others.")
+
+
 def roslin_fish_quest(state):
     """Post-rat_quest, second quest, unlocsk fishing and gulf/lake areas, fish-people interactions, etc"""
