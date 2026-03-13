@@ -97,6 +97,13 @@ JOURNAL_ENTRIES = {
             "A small town. Home to a general store, an alchemy shop, and Wilson's Bar. "
         ),
     },
+    "gulf_of_burhkeria": {
+        "title": "Gulf of Burhkeria",
+        "category": "location",
+        "subject": "gulf_of_burhkeria",
+        "order": 1,
+        "text": ("A gulf. "),
+    },
     "lunara": {
         "title": "Lunara",
         "category": "location",

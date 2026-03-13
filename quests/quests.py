@@ -91,11 +91,11 @@ QUESTS = {
         },
     },
     "roslin_fishing": {
-        "name": "A Quiet Catch",
+        "name": "Catching Feelings",
         "description": "Roslin thinks you should get some fish for Celeste after the rat problem.",
         "stages": [
-            "Talk to Roslin",  # Likely done manually via forced cutscene post-rat_quest
-            "Buy fishing supplies from Roslin",
+            "Talk to Roslin",  # Done manually via forced cutscene post-rat_quest
+            "Buy fishing supplies from Roslin",  # But I don't want to.....
             "Open the map and travel to the Gulf of Burhkeria",
             "Cast your line",  # Triton or merfolk-adjacent stops you
             "Return to Roslin",  # Tell Roslin you can't fish, unlocks lake

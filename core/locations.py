@@ -504,7 +504,7 @@ def kimaer(state) -> None:
     print()
     if "Kimaer" not in state.locations_visited:
         write_slow(
-            "The village is quite modest, only a few small houses and a couple businesses around one main square.\n"
+            "The village is quite modest, only a few small houses and businesses around one main square, centered about a well.\n"
             "You can see a general store, an alchemy shop, and a tavern.",
             50,
             200,
@@ -653,9 +653,26 @@ def wilsons_bar(state) -> None:
 
 # endregion
 
+# region Gulf of Burhkeria
+
+
+def gulf_of_burhkeria(state) -> None:
+    state.location = "Gulf of Burhkeria"
+    set_terminal_title(f"Venture - {state.location}")
+    unlock_journal_entry(state, "gulf_of_burhkeria")
+    state.save()
+    clear()
+
+
+# endregion
+
+# region Lake
+
+# endregion
 
 LOCATION_MAP = {
     "Start": start_clearing,
     "Clearing": start_gameplay,
     "Kimaer": kimaer,
+    "Gulf of Burhkeria": gulf_of_burhkeria,
 }
