@@ -23,7 +23,7 @@ from core.display import (
 from core.constants import KIMAER_ROSLIN, KIMAER_CELESTE, KIMAER_WILSON
 from data.items import ITEMS
 from data.journal import unlock_journal_entry
-from quests.quests import is_quest_active
+from quests.quests import is_quest_active, is_quest_completed
 from quests.hooks import get_location_hook
 from dialogue.kimaer.wilson import wilson_interaction
 from dialogue.kimaer.benji import benji_interaction
@@ -36,6 +36,8 @@ from dialogue.kimaer.roslin import (
     roslin_first_meeting,
     roslin_repeat_greeting,
     roslin_gives_broomstick,
+    roslin_fish_quest,
+    roslin_fish_quest_flavor,
 )
 from dialogue.kimaer.silas import silas_interaction
 from core.audio.music_player import play_music, stop_music, play_sfx
@@ -66,7 +68,16 @@ SHOP_DATA = {
                             and not state.inventory.has_item("Broken Broomstick")
                         ),
                         "func": roslin_gives_broomstick,
-                    }
+                    },
+                    {
+                        "label": "About that fishing favor...",
+                        "condition": lambda state: (
+                            is_quest_completed(state, "celeste_rats")
+                            and not is_quest_active(state, "roslin_fishing")
+                            and not is_quest_completed(state, "roslin_fishing")
+                        ),
+                        "func": roslin_fish_quest,
+                    },
                 ],
             },
         },
@@ -659,9 +670,29 @@ def wilsons_bar(state) -> None:
 def gulf_of_burhkeria(state) -> None:
     state.location = "Gulf of Burhkeria"
     set_terminal_title(f"Venture - {state.location}")
-    unlock_journal_entry(state, "gulf_of_burhkeria")
     state.save()
     clear()
+
+    print()
+    if "Gulf of Burhkeria" not in state.locations_visited:
+        write_slow(
+            "You head south towards the coast of the mainland, finding the dock Roslin mentioned.\n\n",
+            50,
+            0,
+            230,
+            140,
+        )
+        write_slow(
+            "It looks like no one's been here for years, the dock is falling apart, covered in  various barnacles and mosses.",
+            50,
+            0,
+            230,
+            140,
+        )
+        press_any_key()
+        state.locations_visited["Gulf of Burhkeria"] = True
+        state.save()
+        clear()
 
 
 # endregion

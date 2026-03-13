@@ -96,8 +96,8 @@ def alchemy_shop_rat_combat(state):
 
     if won:
         celeste_quest_complete(state)
-        # After quest complete, go to normal shop
-        shop(state, "Kimaer", "alchemy")
+        trigger_fish_quest(state)
+        kimaer(state)
     else:
         # Player fled or died - return to Kimaer
         kimaer(state)

@@ -4,6 +4,9 @@ QUEST_HOOKS = {
     "kimaer_alchemy": {
         "celeste_rats:2": "alchemy_shop_rat_combat",
     },
+    "gulf_of_burhkeria": {
+        "roslin_fishing:3": "gulf_fishing_event",
+    },
 }
 
 

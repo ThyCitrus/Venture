@@ -371,9 +371,9 @@ def roslin_fish_quest(state):
         B,
     )
 
-    start_quest("roslin_fish")
-    advance_quest("roslin_fish")
+    start_quest("roslin_fishing")
+    advance_quest("roslin_fishing")
     state.save()
 
     press_any_key()
-    kimaer(state)
+    return
