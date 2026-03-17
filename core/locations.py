@@ -683,7 +683,7 @@ def gulf_of_burhkeria(state) -> None:
             140,
         )
         write_slow(
-            "It looks like no one's been here for years, the dock is falling apart, covered in  various barnacles and mosses.",
+            "It looks like no one's been here for years, the dock is falling apart, covered in various barnacles and mosses.",
             50,
             0,
             230,

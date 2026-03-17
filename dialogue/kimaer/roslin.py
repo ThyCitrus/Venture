@@ -1,9 +1,6 @@
-from core.display import write_slow, press_any_key, print_color
-from core.locations import kimaer
-from core.utils import get_player_color, menu_choice
 import time
-
-from core.constants import KIMAER_ROSLIN
+from core.display import write_slow, press_any_key, print_color
+from core.utils import get_player_color, menu_choice
 from data.journal import unlock_journal_entry
 from quests.quests import advance_quest, is_quest_active, start_quest
 
