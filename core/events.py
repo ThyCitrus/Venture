@@ -108,26 +108,28 @@ def trigger_fish_quest(state):
     """Called after finishing rat_quest, triggers Roslin cutscene about fishing and being helpful and world-building nonsense"""
     from dialogue.kimaer.roslin import roslin_fish_quest, roslin_fish_quest_flavor
 
+    clear()
+
     write_slow(
-        "As you exit the alchemy shop, you notice Roslin standing by the village well."
+        " As you exit the alchemy shop, you notice Roslin standing by the village well."
     )
     print("\n\n")
     write_slow(
-        "Mmh, you sure handled yourself well, sprout, I've definitely seen worse performances with greater weapons.\n",
+        " Mmh, you sure handled yourself well, sprout, I've definitely seen worse performances with greater weapons.\n",
         50,
         200,
         250,
         150,
     )
     write_slow(
-        "And you helped her without a fuss, now that's something, hm?\n",
+        " And you helped her without a fuss, now that's something, hm?\n",
         50,
         200,
         250,
         150,
     )
     write_slow(
-        "Perhaps you'd do something else? Something for me?\n\n", 100, 200, 250, 150
+        " Perhaps you'd do something else? Something for me?\n\n", 100, 200, 250, 150
     )
     choice = menu_choice(["What is it?", "Of course"])
     if choice == 1:

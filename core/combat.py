@@ -885,7 +885,7 @@ def combat(state, enemies: List[Enemy]) -> bool:
             if result == "perfect":
                 print_color("PERFECT PARRY! No damage taken!", 50, 255, 50)
                 print_color("Counter attack!", 255, 200, 50)
-                counter_dmg = enemy.take_damage(last_total_damage // 2)
+                counter_dmg = enemy.take_damage(enemy.damage * 0.1)
                 print_color(f"You counter for {counter_dmg} damage!", 255, 200, 50)
                 if not enemy.is_alive():
                     print_color(f"{enemy.name} defeated!", 50, 255, 50)
