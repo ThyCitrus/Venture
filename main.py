@@ -6,6 +6,7 @@ venture.py - A simple text-based adventure game.
 import json
 import time
 import sys
+import random
 from core.display import (
     press_any_key,
     set_terminal_title,
@@ -16,10 +17,11 @@ from core.display import (
 from core.utils import location_router, menu_choice
 from core.state import GameState
 from core.audio.music_player import play_music, stop_music, play_sfx
+from data.fonts import get_font, print_font, fonts
 
 # endregion
 
-# Change in main so I can push and change the commit message so that way I don't confuse anyone
+active_font_name = "default"  # fallback
 
 # location ideas: ["Kimaer", "Lunara", "Duskwood", "Eldoria", "Frostholm", "Lake", "Cave", "Gulf of Burhkeria", "Nyctos Deep"]
 
@@ -37,11 +39,16 @@ KIMAER_SILAS = "kimaer_silas"
 
 # region Game Functions
 def show_main_menu() -> None:
+    global active_font_name
+
     set_terminal_title("Venture - Main Menu")
     clear()
-    print("==============================")
-    print_color("      Welcome to Venture", 255, 200, 50)
-    print("==============================")
+    print()
+
+    font_art = get_font(active_font_name)
+
+    print_color(font_art, 255, 200, 50)
+
     print()
     choice = menu_choice(["Start New Game", "Load Game", "Credits", "Exit"])
     if choice == 1:
@@ -61,8 +68,8 @@ def show_credits() -> None:
     print("==============================")
     print("Developed by AuxiliaryGames")
     print("Coding -- ThyCitrus, Water890909")
-    print("Story -- ThyCitrus, B R E A D")
-    print("Soundtrack -- Drantom")
+    print("Story -- ThyCitrus, BREAD")
+    print("Soundtrack -- Drantom, ThyCitrus")
     print("==============================")
     press_any_key()
     show_main_menu()
@@ -115,13 +122,31 @@ set_terminal_title("Venture")
 
 
 def boot_intro() -> None:
+    global active_font_name
+
+    target_duration = 2.0
+    min_speed = 10  # just in case, idk
+
     clear()
     time.sleep(2)
     write_slow("AuxiliaryGames Presents...", 100, 255, 50, 0)
     time.sleep(1)
     clear()
     print()
-    write_slow("                 Venture", 150, 255, 200, 50)
+
+    active_font_name = random.choice(list(fonts.keys()))
+    font_art = get_font(active_font_name)
+    length = len(font_art)
+
+    if length > 0:
+        delay_per_char = target_duration / length
+        speed = int(delay_per_char * 100)
+        speed = max(speed, min_speed)
+    else:
+        speed = min_speed
+
+    write_slow(font_art, speed, 255, 200, 50)
+
     time.sleep(1)
     show_main_menu()
 
@@ -129,5 +154,3 @@ def boot_intro() -> None:
 if __name__ == "__main__":
     boot_intro()
 # endregion
-
-# test
