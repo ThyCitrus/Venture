@@ -333,7 +333,7 @@ def sleep(state: GameState, location: str = "unknown") -> None:
     sleep_messages = {
         "wilson_bar": [
             "You collapse onto the rough bed upstairs. The noise from below fades as exhaustion takes over.",
-            "The mattress is lumpy, but sleep comes quickly after a long shift.",
+            "The mattress is lumpy, but sleep comes quickly after a long day.",
             "You drift off to the muffled sounds of the tavern below.",
         ],
         "inn": [

@@ -20,7 +20,8 @@ def bar_serving_minigame(round_number: int) -> int:
     # Round configuration
     base_time = max(1.0, 6.0 - (round_number / 2))
     patrons = 10 + (round_number * 5)  # 15, 20, 25, 30...
-    points_per_second = 10 * round_number  # Scales with difficulty
+    max_points = 40 + 10 * round_number  # 50, 60, 70, ...
+    points_per_second = max_points / base_time
 
     print_color(f"=== Round {round_number} ===", 255, 200, 50)
     print(f"Serve {patrons} patrons!")
@@ -92,7 +93,7 @@ def bar_serving_minigame(round_number: int) -> int:
                 remaining = base_time - elapsed
 
                 # Update points
-                order["points"] = max(0, 50 - int(elapsed * points_per_second))
+                order["points"] = max(0, int(max_points * (remaining / base_time)))
 
                 if remaining > 0:
                     bar_length = int((remaining / base_time) * 20)

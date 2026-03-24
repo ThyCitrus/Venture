@@ -107,7 +107,7 @@ def wilson_first_meeting(state):
                 B,
             )
             write_slow(
-                "\n Loud when it's not. I keep the peace. Mostly.",
+                "\n Loud when it's not. I keep the peace.",
                 50,
                 R,
                 G,
@@ -181,10 +181,10 @@ def wilson_first_meeting(state):
 
         # Check if all topics exhausted
         if topics["introduced"] and topics["tavern"] and topics["town"]:
-            time.sleep(1)
+            time.sleep(2)
             write_slow(
                 "\n Wilson leans on the bar, studying you.",
-                50,
+                70,
                 R,
                 G,
                 B,
@@ -244,7 +244,7 @@ def wilson_first_meeting(state):
                         state.wilson_employee = True
                     topics["job_offered"] = True
                     press_any_key()
-                    break
+                    wilson_work_shift(state)
 
                 elif job_choice == 2:
                     if state.gold >= 20:
@@ -450,40 +450,28 @@ def wilson_repeat_greeting(state):
     ]
     write_slow(random.choice(greetings), 50, R, G, B)
     print()
-    write_slow(" Need a place to stay?", 50, R, G, B)
+
+    write_slow(" Room's twenty gold. Or work a shift and it's free.", 50, R, G, B)
     print()
+    job_choice = menu_choice(["Work a shift", "Pay 20 gold for the room", "Never mind"])
+    if job_choice == 1:
+        wilson_work_shift(state)
+    elif job_choice == 2:
+        if state.gold >= 20:
+            state.gold -= 20
+            print_color("Paid 20 gold for the room.", 200, 255, 200)
+            from core.utils import sleep
 
-    choice = menu_choice(["Yes", "No"])
+            sleep(state, "wilson_bar")
+            if not state.rat_quest_triggered:
+                from core.events import trigger_rat_quest
 
-    if choice == 1:
-        write_slow(" Room's twenty gold. Or work a shift and it's free.", 50, R, G, B)
-        print()
-        job_choice = menu_choice(["Work a shift", "Pay 20 gold", "Never mind"])
-
-        if job_choice == 1:
-            wilson_work_shift(state)
-        elif job_choice == 2:
-            if state.gold >= 20:
-                state.gold -= 20
-                print_color("Paid 20 gold for the room.", 200, 255, 200)
-                from core.utils import sleep
-
-                sleep(state, "wilson_bar")
-                if not state.rat_quest_triggered:
-                    from core.events import trigger_rat_quest
-
-                    trigger_rat_quest(state)
-            else:
-                print_color(
-                    f"Not enough gold! Need 20, have {state.gold}.", 255, 100, 100
-                )
-                time.sleep(2)
+                trigger_rat_quest(state)
         else:
-            write_slow(" Suit yourself.", 50, R, G, B)
-            print()
-            press_any_key()
+            print_color(f"Not enough gold! Need 20, have {state.gold}.", 255, 100, 100)
+            time.sleep(2)
     else:
-        write_slow(" Right. Bar's there if you want a drink.", 50, R, G, B)
+        write_slow(" Suit yourself. Bar's there if you want a drink.", 50, R, G, B)
         print()
         press_any_key()
 
