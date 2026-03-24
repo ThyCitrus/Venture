@@ -28,7 +28,7 @@ fonts = {
 
 
 def get_font(font_name):
-    return fonts.get(font_name, fonts["default"])
+    return fonts.get(font_name, fonts["fancy_large"])
 
 
 def print_font(font_name):

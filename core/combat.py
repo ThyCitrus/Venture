@@ -332,6 +332,34 @@ def _skill_qte(sequence: list, time_limit: float) -> int:
             t.start()
 
             start = time.time()
+
+            # Countdown before starting
+            clear()
+            print_color("=== SKILL INPUT ===", 100, 200, 255)
+            print()
+            parts = []
+            for j, k in enumerate(sequence):
+                disp = key_display.get(k, k.upper())
+                if j < i:
+                    parts.append(f"\033[38;2;50;200;50m{disp}\033[0m")
+                elif j == i:
+                    parts.append(f"\033[38;2;255;255;50m[ {disp} ]\033[0m")
+                else:
+                    parts.append(f"\033[38;2;150;150;150m{disp}\033[0m")
+            print("  " + "  →  ".join(parts))
+            print()
+            for countdown in range(3, 0, -1):
+                print_color(f"Starting in... {countdown}", 255, 255, 100)
+                time.sleep(0.8)
+                clear()
+                print_color("=== SKILL INPUT ===", 100, 200, 255)
+                print()
+                print("  " + "  →  ".join(parts))
+                print()
+            print_color("GO!", 50, 255, 50)
+            time.sleep(0.3)
+            clear()
+
             while not pressed.is_set() and time.time() - start < time_limit:
                 bar = [" "] * bar_width
                 for j in range(target_start, min(target_end, bar_width)):
@@ -376,10 +404,36 @@ def _skill_qte(sequence: list, time_limit: float) -> int:
             clear()
             print_color("=== SKILL INPUT ===", 100, 200, 255)
             print()
-            print_color(
-                f"Too slow! Interrupted at step {i+1}/{len(sequence)}.", 255, 100, 100
-            )
-            time.sleep(1.5)
+
+            # Bounce effect: 3 bounces before miss
+            bounce_pos = bar_width // 2
+            bounce_dir = -1
+            bounce_speed = 3
+
+            for bounce in range(3):
+                for _ in range(6):  # Bounce animation frames
+                    bar = [" "] * bar_width
+                    if 0 <= bounce_pos < bar_width:
+                        bar[int(bounce_pos)] = "▓"
+                    clear()
+                    print_color("=== SKILL INPUT ===", 100, 200, 255)
+                    print()
+                    print_color(
+                        f"Too slow! Interrupted at step {i+1}/{len(sequence)}.",
+                        255,
+                        100,
+                        100,
+                    )
+                    print()
+                    print(f"[{''.join(bar)}]")
+                    print()
+                    time.sleep(0.08)
+                    bounce_pos += bounce_dir * bounce_speed
+                    if bounce_pos <= 5 or bounce_pos >= bar_width - 6:
+                        bounce_dir *= -1
+
+            print_color("MISS!", 255, 100, 100)
+            time.sleep(1.2)
             break
 
         p = press_position[0]
@@ -413,11 +467,43 @@ def _skill_qte(sequence: list, time_limit: float) -> int:
             print_color("Hit!", 255, 200, 50)
             time.sleep(0.3)
         else:
+            # Miss with bounce effect
             clear()
             print_color("=== SKILL INPUT ===", 100, 200, 255)
             print()
-            print_color("Missed!", 255, 100, 100)
-            time.sleep(1.5)
+
+            bounce_pos = bar_width // 2
+            bounce_dir = -1
+            bounce_speed = 4
+
+            for bounce in range(3):
+                for _ in range(5):  # Faster bounce for regular miss
+                    bar = [" "] * bar_width
+                    for j in range(target_start, min(target_end, bar_width)):
+                        bar[j] = "█"
+                    if 0 <= bounce_pos < bar_width:
+                        bar[int(bounce_pos)] = "▓"
+                    clear()
+                    print_color("=== SKILL INPUT ===", 100, 200, 255)
+                    print()
+                    parts = []
+                    for j, k in enumerate(sequence):
+                        disp = key_display.get(k, k.upper())
+                        if j <= i:
+                            parts.append(f"\033[38;2;50;200;50m{disp}\033[0m")
+                        else:
+                            parts.append(f"\033[38;2;150;150;150m{disp}\033[0m")
+                    print("  " + "  →  ".join(parts))
+                    print()
+                    print(f"[{''.join(bar)}]")
+                    print()
+                    time.sleep(0.06)
+                    bounce_pos += bounce_dir * bounce_speed
+                    if bounce_pos <= 0 or bounce_pos >= bar_width - 1:
+                        bounce_dir *= -1
+
+            print_color("MISSED!", 255, 100, 100)
+            time.sleep(1.2)
             break
 
     return hits
@@ -617,7 +703,7 @@ def qte_defense(difficulty: float = 1.0) -> str:
     position = [0]
     direction = [1]
     pressed = threading.Event()
-    press_position = [None]
+    press_position = [-1]  # Changed from None to -1 (invalid position)
 
     def check_input():
         ch = _read_char_timeout(6.0, accept={" "})
@@ -651,9 +737,9 @@ def qte_defense(difficulty: float = 1.0) -> str:
     finally:
         _restore_terminal(saved)
 
-    if press_position[0] is None:
-        return "miss"
     p = press_position[0]
+    if p < 0:  # No press detected (-1 sentinel value)
+        return "miss"
     if perfect_start <= p < perfect_end:
         return "perfect"
     elif target_start <= p < target_end:

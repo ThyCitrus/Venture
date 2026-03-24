@@ -513,7 +513,7 @@ def wilson_work_shift(state):
     tips = total_score // 100
     payment = tips // 2  # Wilson keeps half
 
-    if total_score >= 2000:
+    if total_score >= 5000:
         write_slow(
             f" Wilson nods approvingly. 'Good work. You earned {tips} gold in tips. Keep half.'",
             50,
@@ -521,7 +521,7 @@ def wilson_work_shift(state):
             G,
             B,
         )
-    elif total_score >= 1000:
+    elif total_score >= 2500:
         write_slow(
             f" Wilson gives a slight nod. 'Not bad. {tips} gold in tips. Your cut's {payment}.'",
             50,

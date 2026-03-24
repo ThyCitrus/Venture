@@ -13,4 +13,4 @@
 
 
 # Modules
-pygame==2.0
+pygame-ce

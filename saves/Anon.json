@@ -1,14 +1,14 @@
 {
   "name": "Anon",
-  "player_color": "60 71 220",
+  "player_color": "90 81 199",
   "location": "Kimaer",
   "health": 114,
   "max_health": 120,
-  "mana": 48,
+  "mana": 2,
   "max_mana": 48,
   "stamina": 48,
   "max_stamina": 48,
-  "gold": 0,
+  "gold": 55,
   "inventory": [
     {
       "name": "Journal",
@@ -31,31 +31,19 @@
     {
       "name": "Health Potion",
       "item_type": "potion",
-      "count": 2,
-      "value": 15
-    },
-    {
-      "name": "Fishing Rod",
-      "item_type": "tool",
       "count": 1,
-      "value": 25
-    },
-    {
-      "name": "Worm",
-      "item_type": "bait",
-      "count": 14,
-      "value": 1
+      "value": 15
     }
   ],
-  "level": 2,
-  "xp": 26,
-  "next_level": 150,
+  "level": 1,
+  "xp": 62,
+  "next_level": 100,
   "player_class": "Paladin",
   "race": "Human",
   "npc_met": {
     "kimaer_roslin": "Roslin",
     "kimaer_celeste": "Celeste",
-    "kimaer_wilson": "wilson"
+    "kimaer_benji": "benji"
   },
   "npc_topics_asked": {
     "roslin": {
@@ -105,7 +93,8 @@
     "wilson",
     "wilson_tavern",
     "wilson_gnome",
-    "celeste_rats"
+    "celeste_rats",
+    "benji"
   ],
   "rat_quest_triggered": true,
   "celeste_declined": false
