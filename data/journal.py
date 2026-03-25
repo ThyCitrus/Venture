@@ -1,7 +1,7 @@
 import time
 
 JOURNAL_ENTRIES = {
-    # === CHARACTERS ===
+    # region === CHARACTERS ===
     # Roslin
     "roslin": {
         "title": "Roslin",
@@ -87,7 +87,7 @@ JOURNAL_ENTRIES = {
         "order": 1,
         "text": "A Gnome of unclear occupation sitting near the fountain. Either a prophet or completely unhinged. Possibly both.",
     },
-    # === LOCATIONS ===
+    # region === LOCATIONS ===
     "kimaer": {
         "title": "Kimaer",
         "category": "location",
@@ -111,7 +111,7 @@ JOURNAL_ENTRIES = {
         "order": 1,
         "text": "A settlement near the lake to the northwest of Kimaer.",
     },
-    # === ENEMIES ===
+    # region === ENEMIES ===
     "giant_rat": {
         "title": "Giant Rat",
         "category": "enemy",
@@ -119,7 +119,35 @@ JOURNAL_ENTRIES = {
         "order": 1,
         "text": "A cancerous rodent. Deserves nothing but death.",
     },
-    # === LORE ===
+    "goblin": {
+        "title": "Goblin",
+        "category": "enemy",
+        "subject": "goblin",
+        "order": 2,
+        "text": "A Wildkin goblin, twisted by their obsession of chaos and mischief.",
+    },
+    "wolf": {
+        "title": "Wolf",
+        "category": "enemy",
+        "subject": "wolf",
+        "order": 3,
+        "text": "A Wildkin wolf, misshapen for their loyalty to their pack and not their individuality.",
+    },
+    "skeleton": {
+        "title": "Skeleton",
+        "category": "enemy",
+        "subject": "skeleton",
+        "order": 4,
+        "text": "A reanimated corpse, brought back to scour this realm by dark magic.",
+    },
+    "bandit": {
+        "title": "Bandit",
+        "category": "enemy",
+        "subject": "bandit",
+        "order": 5,
+        "text": "A criminal scavenger. Known for their ruthless nature and banditry.",
+    },
+    # region === LORE ===
     # Add as needed
 }
 
