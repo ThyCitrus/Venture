@@ -1,5 +1,5 @@
 # Venture
-A terminal-based RPG built in Python. Developed by Auxiliary Games (that's me!).
+A terminal-based RPG built in Python. Developed by AuxiliaryGames.
 
 ---
 
