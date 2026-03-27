@@ -1,11 +1,11 @@
 # Venture
-A terminal-based RPG built in Python. Developed by Auxiliary Games (that's me!).
+A terminal-based RPG built in Python. Developed by AuxiliaryGames.
 
 ---
 
 ## About
 
-Venture is a text-based RPG set in a handcrafted fantasy world. You wake up in a field with nothing: no name, no class, no direction; and go from there. The world is driven by dialogue, exploration, and consequence, which sounds impressive until you realize it's also driven by me having to write all of it.
+Venture is a text-based RPG set in a handcrafted (literally, that map sucked, dude) fantasy world. You wake up in a field with nothing: no name, no class, no direction; and go from there. The world is driven by dialogue, exploration, and consequence, which sounds impressive until you realize it's also driven by me having to write all of it (my hired help doesn't help much).
 
 It's in active development. "Playable" is being used generously here. There isn't a ton to do yet, and things will break. That's a promise, not a warning.
 
@@ -13,7 +13,7 @@ It's in active development. "Playable" is being used generously here. There isn'
 
 ## Features
 
-- **Character creation** - Name your character, pick a class, pick a race (eventually), and receive a randomly generated color. If you roll three identical values, send me a screenshot. I might put you in the game. Or just, be helpful, that warrants a cameo.
+- **Character creation** - Name your character, pick a class, pick a race (eventually probably maybe), and receive a randomly generated color. If you roll three identical values, send me a screenshot. I might put you in the game. Or just, be helpful to me in some way, that warrants a cameo.
 - **Five playable classes** - Fighter, Warlock, Rogue, Paladin, and Cleric. Each has unique stat modifiers and resource pools (HP, mana, stamina). Some have no mana. Some have no stamina.
 - **Turn-based combat** - Fight enemies using class-specific skills, spells, and techniques that unlock as you level up.
 - **Quest system** - Multi-stage quests with branching dialogue and actual consequences. In theory.
@@ -38,7 +38,7 @@ Planned locations include Lunara, Duskwood, Eldoria, Frostholm, the Gulf of Burh
 
 ## Getting Started
 
-**Requirements:** Python 3.10+ (developed on 3.12), pygame 2.0+, git to be installed
+**Requirements:** Python 3.10+ (developed on 3.14), pygame 2.0+, git to be installed
 
 ```bash
 python -m pip install pygame
@@ -47,7 +47,7 @@ cd venture
 python main.py
 ```
 
-One dependency, pygame, is required, above is a series of commands to perform in your terminal (after downloading python) on how to play the game
+One dependency, pygame, is required, above is a series of commands to perform in your terminal (after downloading python) on how to play the game. That said, if you have an OS that isn't windows... idk, ask AI how to do this, I am ~90% sure that this will work on different OS, I've tried making it to do that, but I have no way to test whether or not it does, so anyone trying has my best wishes.
 
 ---
 
@@ -90,6 +90,10 @@ Early development. The tutorial arc and Kimaer are playable. Most of the world m
 - Fishing minigame
 - Dungeon crawling
 - Additional locations (Lunara, the Gulf, the Lake)
+- Politics
+- Lore
+
+This is all crazy shit, I know
 
 **Development doc:** [Google Docs](https://docs.google.com/document/d/1618JGgBIqtmNnqrlXR5Ycyos6SO8HVzB-CSbSv6EmsQ/edit?usp=sharing)
 
@@ -99,8 +103,4 @@ Early development. The tutorial arc and Kimaer are playable. Most of the world m
 
 Not licensed for redistribution. All rights reserved.
 
-## Help
-
-FUCKKKKKKKKKKKKKKKK
-
-WATER! I BROKE EVERYTHING FUCK
+I think that means you don't have the right to steal this from me, but I have *literally* no way of knowing, but in any case, please don't, yeah? Not yet anyways. I'm willing to share utils, I guess, but like... please don't steal my game and make it better without me involved someway somehow.
