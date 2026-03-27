@@ -15,10 +15,8 @@ JOURNAL_ENTRIES = {
         "category": "character",
         "subject": "roslin",
         "order": 2,
-        "text": (
-            "Roslin's General Store smells of sandalwood and rain-soaked bark. "
-            "She stocks the basics, but her inventory seems to shift depending on what you need."
-        ),
+        "text": "Roslin's General Store smells of sandalwood and rain-soaked bark.\n"
+        "She stocks the basics, but her inventory seems to shift depending on what you need.",
     },
     "roslin_town": {
         "title": "Roslin - On Kimaer",
@@ -93,16 +91,14 @@ JOURNAL_ENTRIES = {
         "category": "location",
         "subject": "kimaer",
         "order": 1,
-        "text": (
-            "A small town. Home to a general store, an alchemy shop, and Wilson's Bar. "
-        ),
+        "text": "A small town. Home to a general store, an alchemy shop, and Wilson's Bar. ",
     },
     "gulf_of_burhkeria": {
         "title": "Gulf of Burhkeria",
         "category": "location",
         "subject": "gulf_of_burhkeria",
         "order": 1,
-        "text": ("A gulf. "),
+        "text": "A gulf. ",
     },
     "lunara": {
         "title": "Lunara",
