@@ -55,30 +55,40 @@ One dependency, pygame, is required, above is a series of commands to perform in
 
 ```
 venture/
-├── main.py               # Entry point and core game loop
-├── requirements.txt      # *A* dependency: pygame
-├── README.md             # You're looking at it
+├── main.py                 # Entry point and core game loop
+├── requirements.txt        # *A* dependency: pygame
+├── README.md               # You're looking at it
 ├── core/
-|   ├── audio             # FOR MUSIC!! WE HAVE THAT!!
-|   |   ├──music
-|   |   └──sfx
-│   ├── combat.py         # Combat engine
-│   ├── locations.py      # Location handlers
-│   ├── utils.py          # Shared utilities (printing, input, XP, etc.)
-│   └── constants.py      # Game constants
+|   ├── audio               # FOR MUSIC!! WE HAVE THAT!!
+|   |   ├── music_player.py # Controls sound (music and sfx)
+|   |   ├── music           # Contains audio files
+|   |   └── sfx             # Doesn't exist anymore?
+│   ├── combat.py           # Combat engine
+│   ├── locations.py        # Location handlers
+│   ├── display.py          # Visual effects
+│   ├── events.py           # Update state based on events
+│   ├── inventory.py        # Inventory functionality
+│   ├── minigames.py        # Games that are mini
+│   ├── router.py           # Route player location based on state
+│   ├── state.py            # Player properties and classes
+│   ├── utils.py            # Shared utilities (printing, input, XP, etc.)
+│   └── constants.py        # Game constants
 ├── data/
-│   ├── items.py          # Item definitions
-│   ├── map.py            # ASCII world map
-│   ├── journal.py        # Journal entries
-│   └── skills.py         # Spells and techniques
+│   ├── enemies.py          # Enemy properties
+│   ├── fonts.py            # Menu screen fonts
+│   ├── items.py            # Item definitions
+│   ├── map.py              # ASCII world map
+│   ├── location_maps.py    # ASCII maps for specific locations
+│   ├── journal.py          # Journal entries
+│   └── skills.py           # Spells and techniques
 ├── dialogue/
-│   └── kimaer/           # NPC dialogue by location
+│   └── kimaer/             # NPC dialogue by location
 ├── quests/
-│   ├── quests.py         # Quest state management
-│   └── hooks.py          # Location-based quest triggers
+│   ├── quests.py           # Quest state management
+│   └── hooks.py            # Location-based quest triggers
 ```
 
-No, I will not be updating this as new files are added. I am doing this all for free. Maybe Water will.
+No, I will not be updating this as new files are added. I am doing this all for free. Maybe [Synapse512](https://github.com/Synapse512) will.  
 
 ---
 
