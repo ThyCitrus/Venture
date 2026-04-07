@@ -20,7 +20,7 @@ from core.display import (
     write_slow,
     set_terminal_title,
 )
-from core.constants import KIMAER_ROSLIN, KIMAER_CELESTE, KIMAER_WILSON
+from core.constants import KIMAER_ROSLIN, KIMAER_CELESTE, KIMAER_WILSON, NYCTOS_GUARD
 from data.items import ITEMS
 from data.journal import unlock_journal_entry
 from quests.quests import is_quest_active, is_quest_completed
@@ -683,12 +683,25 @@ def gulf_of_burhkeria(state) -> None:
             140,
         )
         write_slow(
-            "It looks like no one's been here for years, the dock is falling apart, covered in various barnacles and mosses.",
+            "It looks like no one's been here for years, the dock is falling apart and is covered in various barnacles and mosses.",
             50,
             0,
             230,
             140,
         )
+        if (
+            state.inventory.has_item("Fishing Rod")
+            and not NYCTOS_GUARD in state.npc_met
+        ):
+            time.sleep(3)
+            write_slow("\n\nFish here?", 50, 0, 230, 140)
+            choice = menu_choice(["Fish", "Go back"], state)
+            if choice == 1:
+                triton_introduction(state)
+            else:
+                write_slow("You decide against fishing for now.", 50, 0, 230, 140)
+                time.sleep(2)
+
         press_any_key()
         state.locations_visited["Gulf of Burhkeria"] = True
         state.save()
