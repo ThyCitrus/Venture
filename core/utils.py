@@ -510,6 +510,10 @@ def get_time_label(state) -> str:
 
 
 def set_time(state, period) -> None:
+    """
+    Set time of day to a specific period.
+    Periods are: Morning, Noon, Afternoon, Evening, Night, Midnight
+    """
     if period in TIME_PERIODS:
         state.time_of_day = TIME_PERIODS.index(period)
     else:
