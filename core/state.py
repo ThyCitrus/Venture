@@ -35,6 +35,8 @@ class GameState:
         self.completed_quests: List[str] = []
         self.active_effects: list = []
         self.journal_entries: List[str] = []
+        self.time_of_day: int = 0
+        self.day: int = 1
 
     def save(self) -> None:
         saves_dir = Path("saves")

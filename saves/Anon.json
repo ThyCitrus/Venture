@@ -96,6 +96,8 @@
     "celeste_rats",
     "benji"
   ],
+  "time_of_day": 0,
+  "day": 1,
   "rat_quest_triggered": true,
   "celeste_declined": false
 }

@@ -269,57 +269,49 @@ def add_xp(state, amount: int) -> None:
 
 
 def show_hud(state) -> None:
-    # Location
-    print_color(f"Current Location: {state.location}", 200, 200, 255)
+    # --- Line 1: Location | Day - Time ---
+    day = getattr(state, "day", 1)
+    time_label = get_time_label(state)
+    print_color(f"{state.location}  |  Day {day}  -  {time_label}", 200, 200, 255)
 
-    # Health color based on percentage
-    health_percent = (state.health / state.max_health) * 100
-    if health_percent > 75:
-        h_r, h_g, h_b = 50, 255, 50  # Green
-    elif health_percent > 50:
-        h_r, h_g, h_b = 255, 255, 50  # Yellow
-    elif health_percent > 25:
-        h_r, h_g, h_b = 255, 165, 50  # Orange
+    # --- Line 2: stats ---
+    health_percent = state.health / state.max_health
+
+    if health_percent > 0.75:
+        h_r, h_g, h_b = 50, 255, 50
+    elif health_percent > 0.50:
+        h_r, h_g, h_b = 255, 255, 50
+    elif health_percent > 0.25:
+        h_r, h_g, h_b = 255, 165, 50
     else:
-        h_r, h_g, h_b = 255, 50, 50  # Red
+        h_r, h_g, h_b = 255, 50, 50
 
-    # Mana - Magenta
-    mana_r, mana_g, mana_b = 255, 0, 255
+    parts = [
+        f"\033[38;2;{h_r};{h_g};{h_b}mHP: {state.health}/{state.max_health}\033[0m"
+    ]
 
-    # Stamina - Orange/Brown
-    stam_r, stam_g, stam_b = 255, 140, 0
-
-    # Gold color - gets more yellow as gold increases
-    total_drain = state.gold // 10
-    g_r = 255
-    g_b = max(0, 255 - total_drain)
-    green_drain = max(0, total_drain - 255)
-    g_g = max(150, 255 - green_drain)
-
-    # Level - cyan
-    l_r, l_g, l_b = 0, 255, 255
-
-    # Build the HUD string with color codes
-    health_text = (
-        f"\033[38;2;{h_r};{h_g};{h_b}mHealth: {state.health}/{state.max_health}\033[0m"
-    )
-
-    # Show mana/stamina based on class
-    energy_parts = []
     if state.max_mana > 0:
-        mana_text = f"\033[38;2;{mana_r};{mana_g};{mana_b}mMana: {state.mana}/{state.max_mana}\033[0m"
-        energy_parts.append(mana_text)
+        parts.append(f"\033[38;2;255;0;255mMP: {state.mana}/{state.max_mana}\033[0m")
 
     if state.max_stamina > 0:
-        stamina_text = f"\033[38;2;{stam_r};{stam_g};{stam_b}mStamina: {state.stamina}/{state.max_stamina}\033[0m"
-        energy_parts.append(stamina_text)
+        parts.append(
+            f"\033[38;2;255;140;0mSP: {state.stamina}/{state.max_stamina}\033[0m"
+        )
 
-    gold_text = f"\033[38;2;{g_r};{g_g};{g_b}mGold: {state.gold}\033[0m"
-    level_text = f"\033[38;2;{l_r};{l_g};{l_b}mLevel: {state.level}\033[0m"
+    # Gold color scales from white toward yellow as gold increases
+    drain = state.gold // 10
+    g_r = 255
+    g_g = max(150, 255 - max(0, drain - 255))
+    g_b = max(0, 255 - drain)
+    parts.append(f"\033[38;2;{g_r};{g_g};{g_b}mGold: {state.gold}\033[0m")
 
-    # Combine all parts
-    parts = [health_text] + energy_parts + [gold_text, level_text]
-    print(" | ".join(parts))
+    parts.append(f"\033[38;2;0;255;255mLv. {state.level}\033[0m")
+
+    print("  |  ".join(parts))
+
+    # idea for simpler hud:
+    # [Kimaer | Morning | Day 1]    HP 90  MP 90  G 0  Lv1
+    # one line, maybe add a settings thing and have this be a toggle
 
 
 def sleep(state: GameState, location: str = "unknown") -> None:
@@ -387,10 +379,10 @@ def sleep(state: GameState, location: str = "unknown") -> None:
 
     # Could add other effects here:
     # - Remove status effects (poison, exhaustion, etc.)
-    # - Advance time/day counter
     # - Trigger random events
     # - Restore mana if added
 
+    set_time(state, "Morning")
     state.save()
     time.sleep(2)
 
@@ -501,6 +493,27 @@ def location_router(state: GameState) -> None:
         )
         time.sleep(2)
         kimaer(state)
+
+
+TIME_PERIODS = ["Morning", "Noon", "Afternoon", "Evening", "Night", "Midnight"]
+
+
+def advance_time(state, periods: int = 1) -> None:
+    state.time_of_day += periods
+    while state.time_of_day >= len(TIME_PERIODS):
+        state.time_of_day -= len(TIME_PERIODS)
+        state.day += 1
+
+
+def get_time_label(state) -> str:
+    return TIME_PERIODS[state.time_of_day]
+
+
+def set_time(state, period) -> None:
+    if period in TIME_PERIODS:
+        state.time_of_day = TIME_PERIODS.index(period)
+    else:
+        print_color(f"Invalid time period: {period}", 255, 50, 50)
 
 
 def _setup_terminal():
