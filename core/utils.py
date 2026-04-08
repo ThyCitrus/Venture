@@ -499,10 +499,13 @@ TIME_PERIODS = ["Morning", "Noon", "Afternoon", "Evening", "Night", "Midnight"]
 
 
 def advance_time(state, periods: int = 1) -> None:
-    state.time_of_day += periods
-    while state.time_of_day >= len(TIME_PERIODS):
-        state.time_of_day -= len(TIME_PERIODS)
-        state.day += 1
+    # 1. Calculate how many full days are wrapped up in the total periods
+    total_time = state.time_of_day + periods
+    days_to_add = total_time // len(TIME_PERIODS)
+
+    # 2. Update the state
+    state.day += days_to_add
+    state.time_of_day = total_time % len(TIME_PERIODS)
 
 
 def get_time_label(state) -> str:
@@ -515,7 +518,15 @@ def set_time(state, period) -> None:
     Periods are: Morning, Noon, Afternoon, Evening, Night, Midnight
     """
     if period in TIME_PERIODS:
-        state.time_of_day = TIME_PERIODS.index(period)
+        new_index = TIME_PERIODS.index(period)
+
+        # If the new time is earlier than or the same as now,
+        # it implies we've moved to a new day.
+        # previously we were time-traveling backwards, so this fixes it so the clock always moves forward
+        if new_index <= state.time_of_day:
+            state.day += 1
+
+        state.time_of_day = new_index
     else:
         print_color(f"Invalid time period: {period}", 255, 50, 50)
 
