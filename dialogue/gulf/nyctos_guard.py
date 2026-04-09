@@ -9,8 +9,4 @@ from quests.quests import start_quest, advance_quest, is_quest_active
 
 def triton_introduction(state):
     clear()
-    write_slow(
-        " Just as you cast your hook into the water, a trident erupts from the depths, cutting the line.\n",
-        50,
-    )
-    write_slow(" ", 50)
+    write_slow("I don't know what to write here yet, but I will eventually.")
